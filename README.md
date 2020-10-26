@@ -25,8 +25,8 @@
  > * The idea of a “Choose Your Own Adventure” game appealed to us because we had all experienced the joy and anticipation from seeing our decisions being put into play within a book when we were younger. The premise of allowing one to make their own decisions freely (albeit restricted from only a number of choices due to the infinite possibilities that one can make during any situation) should allow for most people to enjoy the concept as they have the ability to see the results of their decisions in real time.
  > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
  >   * C++ - This will be the main programming language that we use to code this program
- >   * Git - main way of transferring data and information w/ teammates
- >   * Vim - main text editor for C++
+ >   * Git - main way of transferring data and information w/ teammates, version control system
+ >   * Vim - primary text editor for C++
  > * What will be the input/output of your project?
  >	 Input: Character commands
 	>  Output: Consequences for your actions
@@ -38,7 +38,7 @@
  > * Composite
  >   * We decided to use the composite design pattern because since we will have multiple objects/classes, we wanted to make the client and code less complex. It will make the code less complex by allowing us to reuse code in leaf classes, and make the client less complex by allowing it to treat composite and individual parts uniformly. A feature we will implement with this is us being able to implement new components into our code easier.
  > * Iterator
-
+ >   * Our project uses the iterator design pattern because of our subsystems like inventory, which can hold some list of variables. We believe that using the iterator pattern will allow us to see what is in our inventory container faster and simpler. The feature we will be implementing with iterator is being able to traverse containers.
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
  > * Set up your GitHub project board as a Kanban board for the project. It should have columns that map roughly to 
