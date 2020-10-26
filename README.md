@@ -4,9 +4,9 @@
 # Choose Your Own Adventure! (Text-based)
  > Your author list below should include links to all members GitHub and should begin with a "\<" (remove existing author).
  
- > Authors: Dennis Chen - https://github.com/dchen090
-            David Kim - https://github.com/thedjkim
-            Benjamin Shu - https://github.com/benjaminshu2001
+ > Authors: Dennis Chen - https://github.com/dchen090  
+ >          David Kim - https://github.com/thedjkim   
+ >          Benjamin Shu - https://github.com/benjaminshu2001
 
  
  > You will be forming a group of **THREE** students and work on an interesting project that you will propose yourself (in this `README.md` document). You can pick any project that you'd like, but it needs ot implement three design patterns. Each of the members in a group is expected to work on at least one design pattern and its test cases. You can, of course, help each other, but it needs to be clear who will be responsible for which pattern and for which general project features.
@@ -20,14 +20,24 @@
  > * Each member of the group **must** be committing code regularly and make sure their code is correctly attributed to them. We will be checking attributions to determine if there was equal contribution to the project.
 
 ## Project Description
- > Your project description should summarize the project you are proposing. Be sure to include
+> We are creating a “Choose Your Own Adventure” text-based game that will allow users to choose their own actions based on the scenarios provided.
  > * Why is it important or interesting to you?
+ > * The idea of a “Choose Your Own Adventure” game appealed to us because we had all experienced the joy and anticipation from seeing our decisions being put into play within a book when we were younger. The premise of allowing one to make their own decisions freely (albeit restricted from only a number of choices due to the infinite possibilities that one can make during any situation) should allow for most people to enjoy the concept as they have the ability to see the results of their decisions in real time.
  > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- >   * [toolname](link) - Short description
+ >   * C++ - This will be the main programming language that we use to code this program
+ >   * Git - main way of transferring data and information w/ teammates
+ >   * Vim - main text editor for C++
  > * What will be the input/output of your project?
+ >	 Input: Character commands
+	>  Output: Consequences for your actions
  > * What are the three design patterns you will be using. For each design pattern you must:
- >   * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
+ >  * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+ > * Abstract Factory
+ >   * We had picked this pattern because for a text-intensive game, there will be many functions that may overlap and because of that, we will be able to create an interface for families of related objects and algorithms. An example of an abstract factory in this project would be simply creating algorithms for making an “interact” feature, which would differ based on the object the user is interacting with. With an abstract factory, we would define a family of algorithms, encapsulate them, and then make them interchangeable within the program. 
+ > * Composite
+ >   * We decided to use the composite design pattern because since we will have multiple objects/classes, we wanted to make the client and code less complex. It will make the code less complex by allowing us to reuse code in leaf classes, and make the client less complex by allowing it to treat composite and individual parts uniformly. A feature we will implement with this is us being able to implement new components into our code easier.
+ > * Iterator
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
