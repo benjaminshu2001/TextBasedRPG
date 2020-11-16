@@ -51,6 +51,21 @@
  >   * These cards should represent roughly 7 days worth of development time for your team, taking you until your first meeting with the TA
 ## Class Diagram
  > Include a class diagram(s) for each design pattern and a description of the diagram(s). This should be in sufficient detail that another group could pick up the project this point and successfully complete it. Use proper OMT notation (as discussed in the course slides). You may combine multiple design patterns into one diagram if you'd like, but it needs to be clear which portion of the diagram represents which design pattern (either in the diagram or in the description). 
+ ![strategy pattern](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/strategy_design_pattern.png?raw=true)
+ 
+ This is the strategy pattern that incorporates two different functionalities based on the type of attack in our combat system. For instance, if you were 
+ to attack with a normal attack, you would just attack with your raw strength. With the stronger attack, you would utilize mana, a secondary resource, which allows
+ you to deal more damage to the enemy.
+ 
+ ![composite pattern](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/composite_design_pattern.png?raw=true)
+ 
+ This is the composite pattern, which allows us to traverse through areas within our game. Within each area, we are allowed to move in a direction and fight monsters if 
+ there are any present. By utilizing the composite pattern, we are able to traverse through many different types of areas based on one's location.
+ 
+ ![iterator pattern](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/iterator_design_pattern.png?raw=true)
+ 
+ This is the iterator pattern, where we iterate through the player's inventory system. Each item will be easily accessable because of this design pattern, which will
+ help reduce the complexity and increase efficiency of traversing through a player's acquired items. 
  
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 
