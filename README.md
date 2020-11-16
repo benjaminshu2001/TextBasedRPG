@@ -22,19 +22,19 @@
 ## Project Description
 > We are creating a “Choose Your Own Adventure” text-based game that will allow users to choose their own actions based on the scenarios provided.
  > * Why is it important or interesting to you?
- > * The idea of a “Choose Your Own Adventure” game appealed to us because we had all experienced the joy and anticipation from seeing our decisions being put into play within a book when we were younger. The premise of allowing one to make their own decisions freely (albeit restricted from only a number of choices due to the infinite possibilities that one can make during any situation) should allow for most people to enjoy the concept as they have the ability to see the results of their decisions in real time.
+ > * The idea of a “Choose Your Own Adventure” game appealed to us because we had all experienced the joy and anticipation from seeing our decisions being put into play within a book when we were younger. The premise of allowing one to make their own decisions freely (albeit restricted from only a number of choices due to the infinite possibilities that one can make during any situation) should allow for most people to enjoy the concept as they have the ability to see the results of their decisions in real time. We plan on implementing a basic combat system in order to enhance the experience, which hopefully will make the game more exciting overall. As such, the player can win if they finish the story, or lose if they run out of health. 
  > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
  >   * C++ - This will be the main programming language that we use to code this program
  >   * Git - main way of transferring data and information w/ teammates, version control system
  >   * Vim - primary text editor for C++
  > * What will be the input/output of your project?
- >	 Input: Character commands
-	>  Output: Consequences for your actions
+ >   * Input: User commands via std::cin
+ >   * Output: Consequences for your actions, std::cout responses based on the scenarios given
  > * What are the three design patterns you will be using. For each design pattern you must:
  >  * Explain in 3 - 5 sentences why you picked this pattern and what feature you will implement with it
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
- > * Abstract Factory
- >   * We had picked this pattern because for a text-intensive game, there will be many functions that may overlap and because of that, we will be able to create an interface for families of related objects and algorithms. An example of an abstract factory in this project would be simply creating algorithms for making an “interact” feature, which would differ based on the object the user is interacting with. With an abstract factory, we would define a family of algorithms, encapsulate them, and then make them interchangeable within the program. 
+ > * Strategy
+ >   * We had picked this pattern because for a text-intensive game, there will be many functions that may overlap and because of that, we will be able to create an interface for families of related objects and algorithms. An example of the strategy pattern in this project would be creating algorithms for an “interact” feature, which would differ based on the object the user is interacting with. With the strategy pattern, we would define a family of algorithms, encapsulate them, and then incorporate them within the program. 
  > * Composite
  >   * We decided to use the composite design pattern because since we will have multiple objects/classes, we wanted to make the client and code less complex. It will make the code less complex by allowing us to reuse code in leaf classes, and make the client less complex by allowing it to treat composite and individual parts uniformly. A feature we will implement with this is us being able to implement new components into our code easier.
  > * Iterator
