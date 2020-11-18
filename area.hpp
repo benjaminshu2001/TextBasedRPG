@@ -28,11 +28,11 @@ class Area{
 		}
 
 	
-		Area(Area *w, Area *e, Area *s, Area *n, Monster* En, string ref, string desc) {
-			West = w;
-			East = e;
-			South = s;
-			North = n;
+		Area(Monster* En, string ref, string desc) {
+			West = 0;
+			East = 0;
+			South = 0;
+			North = 0;
 			Enemy = En;
 			referenceCode = ref;
 			description = desc;
@@ -55,7 +55,7 @@ class Area{
 				if (South != 0) {
 					cout << "South[S] ";
 				}
-				cout << endl << "Press I to view inventory or Z to quit the game." << endl;
+				cout << endl << "Press I to view inventory, M to view map, or Z to quit the game." << endl;
 			} 
 		}
 
@@ -81,45 +81,83 @@ class Area{
 		}
 
 		void fillMap() {
-			this->AddNorthRoom("A1");
-			this->North->AddNorthRoom("A2");
-			this->North->North->AddWestRoom("B1");
-			this->North->North->AddNorthRoom("A3");
-			this->North->North->North->AddWestRoom("C1");
-			this->North->North->North->West->AddWestRoom("C2");
-			this->North->North->North->West->West->AddSouthRoom("C3");
-			this->North->North->North->AddNorthRoom("A4");
-			this->North->North->North->North->AddEastRoom("D1");
-			this->North->North->North->North->East->AddEastRoom("D2");
-			this->North->North->North->North->AddNorthRoom("A5");
-			this->North->North->North->North->North->AddNorthRoom("A6");
-			this->North->North->North->North->North->North->AddWestRoom("E1");
-			this->North->North->North->North->North->North->AddNorthRoom("A7");
-			this->North->North->North->North->North->North->North->AddNorthRoom("A8");
-			this->North->North->North->North->North->North->North->North->AddWestRoom("F1");
-			this->North->North->North->North->North->North->North->North->AddEastRoom("G1");
-			this->North->North->North->North->North->North->North->North->East->AddEastRoom("G2");
-			this->North->North->North->North->North->North->North->North->AddNorthRoom("A9");
-			this->North->North->North->North->North->North->North->North->North->AddNorthRoom("A10");
-			this->North->North->North->North->North->North->North->North->North->North->AddEastRoom("end");
+			this->AddNorthRoom("A1", "");
+			this->North->AddNorthRoom("A2", "");
+			this->North->North->AddWestRoom("B1", "");
+			this->North->North->AddNorthRoom("A3", "");
+			this->North->North->North->AddWestRoom("C1", "");
+			this->North->North->North->West->AddWestRoom("C2", "");
+			this->North->North->North->West->West->AddWestRoom("C3", "");
+			this->North->North->North->AddNorthRoom("A4", "");
+			this->North->North->North->North->AddEastRoom("D1", "");
+			this->North->North->North->North->East->AddEastRoom("D2", "");
+			this->North->North->North->North->AddNorthRoom("A5", "");
+			this->North->North->North->North->North->AddNorthRoom("A6", "");
+			this->North->North->North->North->North->North->AddWestRoom("E1", "");
+			this->North->North->North->North->North->North->AddNorthRoom("A7", "");
+			this->North->North->North->North->North->North->North->AddNorthRoom("A8", "");
+			this->North->North->North->North->North->North->North->North->AddWestRoom("F1", "");
+			this->North->North->North->North->North->North->North->North->AddEastRoom("G1", "");
+			this->North->North->North->North->North->North->North->North->East->AddEastRoom("G2", "");
+			this->North->North->North->North->North->North->North->North->AddNorthRoom("A9", "");
+			this->North->North->North->North->North->North->North->North->North->AddNorthRoom("A10", "");
+			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom("end", "This is the last room.");
 		}
-		void AddEastRoom(string ref) {
-			this->East = new Area(ref);
+
+
+
+		void PrintMap() {
+			if(this->North != 0) {
+				this->North->PrintMap();
+			}
+			
+			
+			int wOffset = 5;
+			Area* Printer = this;
+			while(Printer->West != 0) {
+				Printer = Printer->West;
+				--wOffset;
+			}
+			
+//			if((Printer->East != this) && (Printer != this)) {
+//				cout << Printer->Refcode() << " - ";
+//				--wOffset;
+//			}			
+
+			for(int i = 0; i < wOffset; ++i) {
+				cout << "     ";
+			}
+		
+			while(Printer->East != 0) {
+				cout << Printer->Refcode() << " - ";
+				Printer = Printer->East;
+			}
+
+			cout << Printer->Refcode() << endl;	
+		}
+
+
+
+
+
+
+		void AddEastRoom(string ref, string desc) {
+			this->East = new Area(0, ref, desc);
 			this->East->West = this;
 		}
 
-		void AddNorthRoom(string ref) {
-			this->North = new Area(ref);
+		void AddNorthRoom(string ref, string desc) {
+			this->North = new Area(0, ref, desc);
 			this->North->South = this;
 		}
 
-		void AddSouthRoom(string ref) {
-			this->South = new Area(ref);
+		void AddSouthRoom(string ref, string desc) {
+			this->South = new Area(0, ref, desc);
 			this->South->North = this;
 		}
 		
-		void AddWestRoom(string ref) {
-			this->West = new Area(ref);
+		void AddWestRoom(string ref, string desc) {
+			this->West = new Area(0, ref, desc);
 			this->West->East = this;
 		}
 

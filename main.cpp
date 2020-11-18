@@ -13,7 +13,7 @@ int main() {
 	
 	char input;
 	Area* ThisRmPntr;	
-
+	string LastRmRC;
 
 	cout << "Hello, welcome to (video game). Enter X to begin or Z to quit." << endl;
 	while ((input != 'x') && (input != 'z')) {
@@ -26,9 +26,11 @@ int main() {
 
 	cout << "Filling Map" << endl;
 
-	Area* Begin = new Area("Start");
+	Area* Begin = new Area(0, "Start", "You are in the first room.");
 	Begin->fillMap();	
 	ThisRmPntr = Begin;
+	LastRmRC = Begin->Refcode();
+	ThisRmPntr->referenceCode = ThisRmPntr->Refcode() + "(Here)";
 
 	cout << "Map Filled" << endl << endl << endl;
 	
@@ -42,31 +44,53 @@ int main() {
 			return 0;
 		}
 		
-		if (input == 'i') {
+		else if (input == 'i') {
 			cout << "Inventory System not yet implemented" << endl;
 		}
 		
-		if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
+		else if (input == 'm') {
+			Begin->PrintMap();
+			cout << endl << endl;
+		}
+
+		else if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->West->Refcode();
 			ThisRmPntr = ThisRmPntr->West;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
 			cout << "You have moved west." << endl << endl;
 		}
 		
-		if ((input == 'd') && (ThisRmPntr->MoveChecker(2) == true)) {
+		else if ((input == 'd') && (ThisRmPntr->MoveChecker(2) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->East->Refcode();
 			ThisRmPntr = ThisRmPntr->East;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
 			cout << "You have moved east." << endl << endl;
 		}
 
-		if ((input == 'w') && (ThisRmPntr->MoveChecker(4) == true)) {
+		else if ((input == 'w') && (ThisRmPntr->MoveChecker(4) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->North->Refcode();
 			ThisRmPntr = ThisRmPntr->North;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
 			cout << "You have moved north." << endl << endl;
 		}
-
-		if ((input == 's') && (ThisRmPntr->MoveChecker(3) == true)) {
+								
+		else if ((input == 's') && (ThisRmPntr->MoveChecker(3) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->South->Refcode();
 			ThisRmPntr = ThisRmPntr->South;
-			cout << "You have moved south." << endl << endl;
-
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+			cout << "You have moved south." << endl << endl;		
 		}
+		
+		else {
+			cout << "Invalid Input!" << endl;
+		}
+
 	}
+
 	cout << "You have reached the end." << endl;
 	
 	return 0;
