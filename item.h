@@ -17,7 +17,7 @@ class Item {
             id = i;
             type = t;
         }
-        ~Item();
+        ~Item() {};
         string getName() {
             return name;
         }

@@ -16,10 +16,10 @@ class Inventory : public Item {
     public:
         Inventory() {};
         
-        Inventory(string n, string des){
-            name = n;
-            description = des;
-        }
+        //Inventory(string n, string des){
+            //name = n;
+          //  description = des;
+        //}
 
         void addItem(Item* i) {
             inv.push_back(i);
@@ -41,10 +41,15 @@ class Inventory : public Item {
        // }
 
         void print() {
+            if(inv.size() == 1) {
+                cout << "You currently have 1 item." << endl;
+            }
+            cout << "You currently have " << inv.size() << " items." << endl;
             for(auto const &i: inv) {
-                cout << (i)->getName() << ", " << (i)->getID() << endl;
+                cout << "Item: " << (i)->getName() << endl << "ID: " << (i)->getID() << endl;
             }
             cout <<endl;
         }
+        
 };
 #endif

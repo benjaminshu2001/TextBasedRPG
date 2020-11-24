@@ -12,15 +12,16 @@
 
 using namespace std;
 
+//template <typenamne T, typename U>
 class InvIterator : public Inventory {
     private:
         Item* data;
-        typedef typename vector<T>::iterator iter;
         iter it;
 
     public:
         void getNext();
         bool isDone();
         Item* getCurrent();
+        vector<Item*>::iterator iter;
 };
 #endif

@@ -31,7 +31,7 @@ class Player {
         }
         void useItem(int i);
         void getItem();
-        string  getName() {
+        string getName() {
             return name;
         }
 };
