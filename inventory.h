@@ -2,9 +2,11 @@
 #define __INVENTORY_H__
 
 #include <iostream>
-#include "Item.h"
-#include "Player.h"
+#include "item.h"
+#include "player.h"
 #include <vector>
+#include <string>
+using namespace std;
 
 class Inventory : public Item {
     private:
@@ -20,7 +22,7 @@ class Inventory : public Item {
         }
 
         void addItem(Item* i) {
-            inv.pushback(i);
+            inv.push_back(i);
         }
 
         bool isEmpty() {
@@ -34,9 +36,9 @@ class Inventory : public Item {
             return inv.size();
         }
 
-        Item* at(Item* i) {
-            return inv.at(i);
-        }
+        //Item* at(Item* i) {
+          //  return inv.at(i);
+       // }
 
         void print() {
             for(auto const &i: inv) {
@@ -44,5 +46,5 @@ class Inventory : public Item {
             }
             cout <<endl;
         }
-}
+};
 #endif

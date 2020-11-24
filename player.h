@@ -2,8 +2,10 @@
 #define __PLAYER_H__
 
 #include <iostream>
-#include "Inventory.h"
-#include "Item.h"
+#include <string>
+#include "inventory.h"
+#include "item.h"
+using namespace std;
 
 class Player {
     private:
@@ -14,11 +16,14 @@ class Player {
         Item* gear;
         Inventory* inv;
     public:
-        Player();
+        Player(string n) {
+            name = n;
+        }
+        Player() {};
         ~Player();
         //Player(name, area);
-        virtual void attack() = 0;
-        virtual void block() = 0;
+        void attack();
+        void block();
         void printInventory(Inventory* inv) {
             for(int i = 0; i < inv->size(); i++) {
                 inv->print();
@@ -26,6 +31,10 @@ class Player {
         }
         void useItem(int i);
         void getItem();
-}
+        string  getName() {
+            return name;
+        }
+};
+
 #endif
 
