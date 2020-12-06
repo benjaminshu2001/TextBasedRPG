@@ -2,54 +2,28 @@
 #define __INVENTORY_H__
 
 #include <iostream>
-#include "item.h"
-#include "player.h"
+#include "container.hpp"
+
 #include <vector>
 #include <string>
+
 using namespace std;
 
-class Inventory : public Item {
+class Inventory : public Container {
     private:
-        string name;
-        string description;
         vector<Item*> inv;
     public:
-        Inventory() {};
-        
-        //Inventory(string n, string des){
-            //name = n;
-          //  description = des;
-        //}
+        Inventory() {};  
+        void add_element(Item* i);
+        bool isEmpty();
+        int size();
+        Item* at(int i);           
+        void print();
+        void sort();
+        void swap(int, int);
 
-        void addItem(Item* i) {
-            inv.push_back(i);
-        }
 
-        bool isEmpty() {
-            if(inv.size() == 0){
-                return true;
-            } else
-                return false;
-        }
-
-        int size() {
-            return inv.size();
-        }
-
-        //Item* at(Item* i) {
-          //  return inv.at(i);
-       // }
-
-        void print() {
-            if(inv.size() == 1) {
-                cout << "You currently have 1 item." << endl;
-            }
-            cout << "You currently have " << inv.size() << " items." << endl;
-            for(auto const &i: inv) {
-                cout << "Item: " << (i)->getName() << endl << "ID: " << (i)->getID() << endl;
-            }
-            cout <<endl;
-        }
+  
         
 };
 #endif

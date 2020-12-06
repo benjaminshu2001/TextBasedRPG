@@ -5,11 +5,13 @@
 #include <iostream>
 using namespace std;
 
+class Iterator;
+
 class Item {
     private:
         string name;
         int id;
-        int type; 
+        int type;
     public:
         Item() { };
         Item(string n, int i, int t) {
@@ -18,6 +20,13 @@ class Item {
             type = t;
         }
         ~Item() {};
+        bool can_be_equipped() {
+            if(id == 1) {
+                return true;
+            }
+            return false;
+        }
+
         string getName() {
             return name;
         }
@@ -27,7 +36,7 @@ class Item {
         int getType() {
             return type;
         }
+   
 };
-
 #endif
 
