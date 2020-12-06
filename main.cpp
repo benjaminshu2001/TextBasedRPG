@@ -27,11 +27,11 @@ int main() {
     cin >> name;
     cout << endl;
 
-    Player* p = new Player(name);
+    Player* p = new Player(name, 10, 10, 5, 5);
     
-    cout << "Hello, " <<  p->getName() << ". Hope you enjoy your stay!" << endl;
+    cout << "Hello, " <<  p->get_name() << ". Hope you enjoy your stay!" << endl;
     cout << "What would you like to do? " << endl;
-    cout << "A = continue \nB = View inventory \nC = Quit" << endl;
+    cout << "A = continue \nB = View inventory \nC = Check stats \nD = Quit" << endl;
     Inventory* inv = new Inventory();
     Equip* eq = new Equip("Sword");
     Equip* eq1 = new Equip(5);
@@ -71,7 +71,10 @@ int main() {
                 inv->print();
             }
         }
-        else if(choice == 'C') {
+        else if(choice == 'C' || choice == 'c') {
+            p->print_stats();
+        }
+        else if(choice == 'D') {
             cout << "Goodbye!" << endl;
             exit(1);
         }
@@ -79,7 +82,7 @@ int main() {
             cout << "Invalid input, please try again." << endl;
         }
         cout << endl << "What would you like to do? " << endl;
-        cout << "A = continue \nB = View inventory \nC = Quit" << endl;
+        cout << "A = continue \nB = View inventory \nC = Check stats \nD = Quit" << endl;
     }
     
 

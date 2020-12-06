@@ -23,7 +23,7 @@ class Equip : public Item {
             return nullptr;
         }
         //Item* create_iterator() {
-          //  Iterator* iter = new InvIterator*(this);
+            //Iterator* iter = new InvIterator*(this);
             //return iter;
         //}
         virtual double evaluate() {
