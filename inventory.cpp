@@ -1,7 +1,6 @@
 #include "inventory.h"
 #include <iostream>
 
-using namespace std;
 
 void Inventory::add_element(Item* i) {
     inv.push_back(i);
@@ -9,7 +8,7 @@ void Inventory::add_element(Item* i) {
 
 void Inventory::print() {
     for(auto const &i: inv) {
-        cout << (i)->getName() << endl;
+        cout << (i)->stringify() << endl;
     }
     cout << endl;
 }

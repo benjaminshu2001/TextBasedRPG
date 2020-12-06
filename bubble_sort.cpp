@@ -1,4 +1,4 @@
-#include "BubbleSort.h"
+#include "bubble_sort.h"
 
 #include <iostream>
 #include "sort.hpp"

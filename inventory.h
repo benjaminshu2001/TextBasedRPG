@@ -7,11 +7,11 @@
 #include <vector>
 #include <string>
 
-using namespace std;
+
 
 class Inventory : public Container {
     private:
-        vector<Item*> inv;
+        std::vector<Item*> inv;
     public:
         Inventory() {};  
         void add_element(Item* i);

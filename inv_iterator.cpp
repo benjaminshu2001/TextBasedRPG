@@ -1,15 +1,12 @@
-
 #include <iostream>
 #include "inventory.h"
-#include "player.h"
 #include "item.h"
-#include "iterator.hpp"
+#include "iterator.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-using namespace std;
 
 InvIterator::InvIterator(Item* ptr) : Iterator(ptr) {
    this->c = left;

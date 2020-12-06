@@ -9,4 +9,4 @@ class BubbleSort : public Sort {
         BubbleSort();
         void sort(Container* c);
 };
-#endif#
+#endif

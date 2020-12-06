@@ -1,19 +1,16 @@
-#ifndef __WEAPON_H__
-#define __WEAPON_H__
+#ifndef __ARMOR_H__
+#define __ARMOR_H__
 
 #include "item.h"
-#include "iterator.h"
-
-#include <iostream>
 #include <string>
+#include "iterator.h"
 
 using namespace std;
 
-class Weapon : public Item {
+class Armor : public Item {
     public:
         string str;
-
-        Weapon(Item* l, Item* r) {
+        Armor(Item* l, Item* r) {
             left = l;
             right = r;
         }
@@ -27,18 +24,17 @@ class Weapon : public Item {
             Iterator* iter = new InvIterator(this);
             return iter;
         }
-        double evaluate() {
+        virtual double evaluate() {
             return right->evaluate();
         }
-        string stringify() {      
-            string s1 = to_string(right->evaluate());
-            str = "Weapon: " + left->stringify() + ", Attack: " + s1;
+        virtual string stringify() {
+            string s = to_string(right->evaluate());
+            str = "Armor: " + left->stringify() + ", Defense: " + s;
             return str;
         }
     private:
         Item* left; //name
-        Item* right; //attack amount
-
+        Item* right; //defense
 };
 #endif
 
