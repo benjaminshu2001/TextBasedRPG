@@ -27,7 +27,7 @@ int main() {
     cin >> name;
     cout << endl;
 
-    Player* p = new Player(name, 10, 10, 5, 5);
+    Player* p = new Player(name, 10, 5, 2, 3);
     
     cout << "Hello, " <<  p->get_name() << ". Hope you enjoy your stay!" << endl;
     cout << "What would you like to do? " << endl;
@@ -53,17 +53,23 @@ int main() {
     
     while(cin >> choice) {
         if(choice == 'A' || choice == 'a') {
-            cout << "WIP, but this should continue the story!" << endl;     
+            cout << "WIP, but this should continue the story!" << endl;
+            cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
+            p->equip_armor(ar);
+            p->equip_weapon(it);
         }
         else if(choice == 'B'|| choice == 'b') {
             cout << "Viewing inventory..." << endl;
             cout << "Here are the items that you currently have in your inventory: " << endl;
             inv->print();
-            cout << "A = Inspect items \nB = Organize by Item Type" << endl;
+            cout << "A = Inspect items \nB = Organize by Item Type\nC = Equip an item" << endl;
             cin >> choice;
             
             if(choice == 'A' || choice == 'a') {
                 cout << iit->current()->stringify() << endl;
+                cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
+
+
             }
             else if(choice == 'B' || choice == 'b') {
                 inv->set_sort_function(new BubbleSort());
@@ -84,7 +90,7 @@ int main() {
         cout << endl << "What would you like to do? " << endl;
         cout << "A = continue \nB = View inventory \nC = Check stats \nD = Quit" << endl;
     }
-    
+  
 
 
 
