@@ -9,16 +9,16 @@
  
 using namespace std;
 
+char startMenu(Area* Start);
+
+
 int main() {
 	
 	char input;
 	Area* ThisRmPntr;	
 	string LastRmRC;
 
-	cout << "Hello, welcome to (video game). Enter X to begin or Z to quit." << endl;
-	while ((input != 'x') && (input != 'z')) {
-		cin >> input;
-	}
+	input = startMenu(ThisRmPntr);
 	if (input == 'z') {
 		cout << "Goodbye." << endl;
 		return 0;
@@ -41,6 +41,7 @@ int main() {
 		cin >> input;
 		cout << endl << endl << endl << endl << endl << endl << endl;		
 		if (input == 'z') {
+			cout << "Goodbye." << endl;
 			return 0;
 		}
 		
@@ -111,6 +112,20 @@ int main() {
 
 
 
+char startMenu(Area* AreaStart) {
+	char input; 
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-~ " << endl;
+	cout << "~                                                            ~ " << endl;
+	cout << "~		 Hello, welcome to (video game).	      ~ " << endl;
+	cout << "~		 Enter X to begin or Z to quit.		      ~	" << endl;
+	cout << "~       By: Dennis Chen, Benjamin Shu, and David Kim	      ~ " << endl;
+	cout << "~							      ~ " << endl;
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-~ "  << endl;
+	while ((input != 'x') && (input != 'z')) {
+		cin >> input;
+	}
+	return input;
+}
 
 
 
