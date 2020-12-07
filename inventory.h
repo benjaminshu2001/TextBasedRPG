@@ -1,13 +1,14 @@
 #ifndef __INVENTORY_H__
 #define __INVENTORY_H__
 
-#include <iostream>
-#include "container.hpp"
 
+#include "container.hpp"
+#include <iostream>
 #include <vector>
 #include <string>
+#include "sort.hpp"
 
-
+class Item;
 
 class Inventory : public Container {
     private:
@@ -20,10 +21,7 @@ class Inventory : public Container {
         Item* at(int i);           
         void print();
         void sort();
-        void swap(int, int);
-
-
-  
+        void swap(int, int); 
         
 };
 #endif
