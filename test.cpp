@@ -8,8 +8,7 @@
 #include "weapon.h"
 #include "equip.h"
 #include "bubble_sort.cpp"
-
-class InvIterator;
+class Iterator;
 
 using std::cout;
 using std::cin;
@@ -62,14 +61,11 @@ int main() {
             cout << "Viewing inventory..." << endl;
             cout << "Here are the items that you currently have in your inventory: " << endl;
             inv->print();
-            cout << "A = Inspect items \nB = Organize by Item Type\nC = Equip an item" << endl;
+            cout << "A = Inspect items \nB = Organize by Item Type"<< endl;
             cin >> choice;
             
             if(choice == 'A' || choice == 'a') {
                 cout << iit->current()->stringify() << endl;
-                cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
-
-
             }
             else if(choice == 'B' || choice == 'b') {
                 inv->set_sort_function(new BubbleSort());
