@@ -26,7 +26,7 @@ int main() {
 
 	cout << "Filling Map" << endl;
 
-	Area* Begin = new Area(0, "Start", "You are in the first room.");
+	Area* Begin = new Area(0, "Start", "You are in the entrance.");
 	Begin->fillMap();	
 	ThisRmPntr = Begin;
 	LastRmRC = Begin->Refcode();
@@ -35,7 +35,7 @@ int main() {
 	cout << "Map Filled" << endl << endl << endl;
 	
 	
-	while((ThisRmPntr->referenceCode != "end") && (input != 'z')) {
+	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z')) {
 		ThisRmPntr->CurrentLocation();
 		cout << "Area RefCode: " <<  ThisRmPntr->Refcode() << endl;
 		cin >> input;
@@ -53,6 +53,18 @@ int main() {
 			cout << endl << endl;
 		}
 
+		else if ((input == 'y') && (ThisRmPntr->Enemy != 0)) {
+			cout <<	ThisRmPntr->Enemy->desc() << endl;
+		}
+
+		else if ((input == 'x') && (ThisRmPntr->Enemy != 0)) {
+			if (ThisRmPntr->Enemy->health < 0) {
+				cout << "Monster is already dead!" << endl;
+			}
+			else {
+				cout << "Combat System not yet implemented!" << endl;
+			}	
+		}
 		else if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
 			ThisRmPntr->referenceCode = LastRmRC;
 			LastRmRC = ThisRmPntr->West->Refcode();
@@ -91,7 +103,7 @@ int main() {
 
 	}
 
-	cout << "You have reached the end." << endl;
+	cout << "You have reached the end. Game Over." << endl;
 	
 	return 0;
 }

@@ -2,6 +2,7 @@
 #include <string>
 //#include "Item.hpp"
 #include "monster.hpp"
+#include "goblin.hpp"
 
 using namespace std;
 
@@ -40,7 +41,13 @@ class Area{
 	
 
 		void CurrentLocation() {
-			cout << description << endl << endl;
+			cout << description << endl;
+
+			if (Enemy != 0) {
+				cout << "There is a " << Enemy->name << " in this room." << endl;
+			}
+			cout << endl;
+
 			if (referenceCode != "end") {			
 				cout << "You may move:  ";
 				if (West != 0) {
@@ -55,7 +62,11 @@ class Area{
 				if (South != 0) {
 					cout << "South[S] ";
 				}
-				cout << endl << "Press I to view inventory, M to view map, or Z to quit the game." << endl;
+				cout << endl << "Press I to view inventory, M to view map, ";
+				if (Enemy != 0) {
+					cout << "Y to view monster details, X to fight monster, ";
+				}
+				cout <<	"or Z to quit the game." << endl;
 			} 
 		}
 
@@ -81,27 +92,30 @@ class Area{
 		}
 
 		void fillMap() {
-			this->AddNorthRoom("A1", "");
-			this->North->AddNorthRoom("A2", "");
-			this->North->North->AddWestRoom("B1", "");
-			this->North->North->AddNorthRoom("A3", "");
-			this->North->North->North->AddWestRoom("C1", "");
-			this->North->North->North->West->AddWestRoom("C2", "");
-			this->North->North->North->West->West->AddWestRoom("C3", "");
-			this->North->North->North->AddNorthRoom("A4", "");
-			this->North->North->North->North->AddEastRoom("D1", "");
-			this->North->North->North->North->East->AddEastRoom("D2", "");
-			this->North->North->North->North->AddNorthRoom("A5", "");
-			this->North->North->North->North->North->AddNorthRoom("A6", "");
-			this->North->North->North->North->North->North->AddWestRoom("E1", "");
-			this->North->North->North->North->North->North->AddNorthRoom("A7", "");
-			this->North->North->North->North->North->North->North->AddNorthRoom("A8", "");
-			this->North->North->North->North->North->North->North->North->AddWestRoom("F1", "");
-			this->North->North->North->North->North->North->North->North->AddEastRoom("G1", "");
-			this->North->North->North->North->North->North->North->North->East->AddEastRoom("G2", "");
-			this->North->North->North->North->North->North->North->North->AddNorthRoom("A9", "");
-			this->North->North->North->North->North->North->North->North->North->AddNorthRoom("A10", "");
-			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom("end", "This is the last room.");
+			Monster* Gob = new Goblin(1, 1, 5);
+
+
+			this->AddNorthRoom(Gob, "A1", "You are in a hallway.");
+			this->North->AddNorthRoom(0, "A2", "You are in a hallway.");
+			this->North->North->AddWestRoom(0, "B1", "");
+			this->North->North->AddNorthRoom(0, "A3", "You are in a hallway.");
+			this->North->North->North->AddWestRoom(0, "C1", "");
+			this->North->North->North->West->AddWestRoom(0, "C2", "");
+			this->North->North->North->West->West->AddWestRoom(0, "C3", "");
+			this->North->North->North->AddNorthRoom(0, "A4", "You are in a hallway.");
+			this->North->North->North->North->AddEastRoom(0, "D1", "");
+			this->North->North->North->North->East->AddEastRoom(0, "D2", "");
+			this->North->North->North->North->AddNorthRoom(0, "A5", "You are in a hallway.");
+			this->North->North->North->North->North->AddNorthRoom(0, "A6", "You are in a hallway.");
+			this->North->North->North->North->North->North->AddWestRoom(0, "E1", "");
+			this->North->North->North->North->North->North->AddNorthRoom(0, "A7", "You are in a hallway.");
+			this->North->North->North->North->North->North->North->AddNorthRoom(0, "A8", "You are in a hallway.");
+			this->North->North->North->North->North->North->North->North->AddWestRoom(0, "F1", "");
+			this->North->North->North->North->North->North->North->North->AddEastRoom(0, "G1", "");
+			this->North->North->North->North->North->North->North->North->East->AddEastRoom(0, "G2", "");
+			this->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A9", "You are in a hallway.");
+			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A10", "");
+			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "end", "This is the last room.");
 		}
 
 
@@ -141,23 +155,23 @@ class Area{
 
 
 
-		void AddEastRoom(string ref, string desc) {
-			this->East = new Area(0, ref, desc);
+		void AddEastRoom(Monster* m, string ref, string desc) {
+			this->East = new Area(m, ref, desc);
 			this->East->West = this;
 		}
 
-		void AddNorthRoom(string ref, string desc) {
-			this->North = new Area(0, ref, desc);
+		void AddNorthRoom(Monster* m, string ref, string desc) {
+			this->North = new Area(m, ref, desc);
 			this->North->South = this;
 		}
 
-		void AddSouthRoom(string ref, string desc) {
-			this->South = new Area(0, ref, desc);
+		void AddSouthRoom(Monster* m, string ref, string desc) {
+			this->South = new Area(m, ref, desc);
 			this->South->North = this;
 		}
 		
-		void AddWestRoom(string ref, string desc) {
-			this->West = new Area(0, ref, desc);
+		void AddWestRoom(Monster* m, string ref, string desc) {
+			this->West = new Area(m, ref, desc);
 			this->West->East = this;
 		}
 
