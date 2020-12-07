@@ -62,7 +62,7 @@ class Area{
 				if (South != 0) {
 					cout << "South[S] ";
 				}
-				cout << endl << "Press I to view inventory, M to view map, ";
+				cout << endl << "Enter I to view inventory, M to view map, E to examine self, ";
 				if (Enemy != 0) {
 					cout << "Y to view monster details, X to fight monster, ";
 				}
@@ -117,8 +117,15 @@ class Area{
 			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A10", "");
 			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "end", "This is the last room.");
 		}
-
-
+												
+		Area* beginMap() {
+			cout << "Beginning Map Construction..." << endl << endl;																	
+			Area* Begin = new Area(0, "Start", "You are standing in fron of the enterance into the dungeon.");
+			Begin->fillMap();
+			
+			cout << "Map Construction Finished." << endl << endl << endl;
+			return Begin;
+		}
 
 		void PrintMap() {
 			if(this->North != 0) {
