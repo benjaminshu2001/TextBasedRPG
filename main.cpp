@@ -99,8 +99,8 @@ int main() {
 	Inv->add_element(it);
         Inv->add_element(ar);	
 	
-	Protagonist->equip_armor(ar);
-	Protagonist->equip_weapon(it);
+	Protagonist->equip_armor(Inv->at(1));
+	Protagonist->equip_weapon(Inv->at(0));
 
 	InvIterator* iit = new InvIterator(test);
 	
@@ -132,6 +132,10 @@ int main() {
 		
 		else if ((input == 'e') || (input == 'E')) {
 			Protagonist->print_stats();
+			cout << "Equipped Weapon: ";
+//			Protagonist->get_weapon();
+			cout << endl << "Equipped Armor: ";
+//			Protagonist->get_armor(); 
 			cout << endl << endl;
 		}
 
@@ -204,7 +208,7 @@ char startMenu(Area* AreaStart) {
 	cout << "~ 		  Enter X to begin or Z to quit.	      ~	" << endl;
 	cout << "~        By: Dennis Chen, Benjamin Shu, and David Kim	      ~ " << endl;
 	cout << "~							      ~ " << endl;
-	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ "  << endl << endl << endl << endl << endl;
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ "  << endl;
 	while ((input != 'x') && (input != 'z')) {						
 		cin >> input;				
 	}										
@@ -235,26 +239,38 @@ Player* createChar() {
 }
 
 void inventoryMenu(Inventory *I, InvIterator* IIT) {
-	char choice;
+	char choice = 0;
 
-	cout << "Here are the items that you currently have in your inventory: " << endl;
+	cout << "==============================================================" << endl;
+	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
-	cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
-        cin >> choice;
+	cout << "==============================================================" << endl;
+
+
 
 	while ((choice != 'z') && (choice != 'Z')) {
+		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
+		cin >> choice;
+		cout << endl << endl << endl;
+
+
 		if ((choice == 'a') || (choice == 'A')) {
+			cout << "==============================================================" << endl;
+			cout << "Here are the that items you currently have in your inventory: " << endl << endl ;
 			I->print();	
+			cout << "==============================================================" << endl;
+			cout << endl;
 		}
 		if ((choice == 'b') || (choice == 'B')) {
 			I->set_sort_function(new BubbleSort());
         	        I->sort();
-            	        I->print();
+			cout << endl << "Inventory Sorted!" << endl;
 		}
 		if ((choice == 'c') || (choice == 'C')) {
-			cout << "Do this later." << endl;
+			cout << "Enter number of item in inventory list to equip or Z to exit" << endl;
+			cout << endl;	
 		}
-		cin >> choice;
+//		cin >> choice;
 	}
 }
 

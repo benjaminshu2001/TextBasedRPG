@@ -1,14 +1,16 @@
 #include <vector>
 #include <string>
-//#include "Item.hpp"
+#include "item.h"
 #include "monster.hpp"
 #include "goblin.hpp"
+#include "ork.hpp"
+#include "minotaur.hpp"
 
 using namespace std;
 
 class Area{
 	public: 
-		//vector<item *> loot;
+		vector<Item*> loot;
 		Area *West;
 		Area *East;
 		Area *South;
@@ -92,17 +94,20 @@ class Area{
 		}
 
 		void fillMap() {
-			Monster* Gob = new Goblin(1, 1, 5);
+			Monster* GobA = new Goblin(1, 1, 5);
+			Monster* GobB = new Goblin(3, 4, 10);
+			Monster* GobC = new Goblin(5, 5, 15);
+			Monster* OrkA = new Ork(8, 10, 20);
+			Monster* Mina = new Minotaur(15, 15, 30);
 
-
-			this->AddNorthRoom(Gob, "A1", "You are in a hallway.");
+			this->AddNorthRoom(GobA, "A1", "You are in a hallway.");
 			this->North->AddNorthRoom(0, "A2", "You are in a hallway.");
-			this->North->North->AddWestRoom(0, "B1", "");
+			this->North->North->AddWestRoom(GobB, "B1", "");
 			this->North->North->AddNorthRoom(0, "A3", "You are in a hallway.");
 			this->North->North->North->AddWestRoom(0, "C1", "");
 			this->North->North->North->West->AddWestRoom(0, "C2", "");
 			this->North->North->North->West->West->AddWestRoom(0, "C3", "");
-			this->North->North->North->AddNorthRoom(0, "A4", "You are in a hallway.");
+			this->North->North->North->AddNorthRoom(GobC, "A4", "You are in a hallway.");
 			this->North->North->North->North->AddEastRoom(0, "D1", "");
 			this->North->North->North->North->East->AddEastRoom(0, "D2", "");
 			this->North->North->North->North->AddNorthRoom(0, "A5", "You are in a hallway.");
@@ -113,8 +118,8 @@ class Area{
 			this->North->North->North->North->North->North->North->North->AddWestRoom(0, "F1", "");
 			this->North->North->North->North->North->North->North->North->AddEastRoom(0, "G1", "");
 			this->North->North->North->North->North->North->North->North->East->AddEastRoom(0, "G2", "");
-			this->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A9", "You are in a hallway.");
-			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A10", "");
+			this->North->North->North->North->North->North->North->North->AddNorthRoom(OrkA, "A9", "You are in a hallway.");
+			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(Mina, "A10", "");
 			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "end", "This is the last room.");
 		}
 												
