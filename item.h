@@ -11,6 +11,7 @@ class Iterator;
 class Item {
     public:
         Item() { };
+        
         virtual std::string stringify() = 0;
         virtual double evaluate() = 0;
         //virtual Iterator* create_iterator() = 0;

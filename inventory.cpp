@@ -1,4 +1,7 @@
 #include "inventory.h"
+#include "item.h"
+//#include "container.hpp"
+
 #include <iostream>
 
 
@@ -8,9 +11,9 @@ void Inventory::add_element(Item* i) {
 
 void Inventory::print() {
     for(auto const &i: inv) {
-        cout << (i)->stringify() << endl;
+        std::cout << (i)->stringify() << std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 void Inventory::sort() {
