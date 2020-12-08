@@ -27,14 +27,17 @@ class Weapon : public Item {
             Iterator* iter = new InvIterator(this);
             return iter;
         }
-        double evaluate() {
+        virtual double evaluate() {
             return right->evaluate();
         }
-        string stringify() {      
+        virtual string stringify() {      
             string s1 = to_string(right->evaluate());
             str = "Weapon: " + left->stringify() + ", Attack: " + s1;
             return str;
         }
+        /*virtual string get_name() {
+            return left->get_name();
+        } */
     private:
         Item* left; //name
         Item* right; //attack amount

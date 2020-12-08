@@ -17,7 +17,7 @@ class Item {
         //virtual Iterator* create_iterator() = 0;
         virtual Item* get_left() = 0;
         virtual Item* get_right() = 0;
-   
+        //virtual std::string get_name() = 0; 
 };
 #endif
 

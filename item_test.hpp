@@ -9,6 +9,15 @@
 #include "inventory.h"
 #include "bubble_sort.h"
 
+TEST(ItemTest, EquipTest) {
+    Inventory* inv = new Inventory();
+    Equip* e1 = new Equip("Baseball Bat");
+    Equip* e2 = new Equip(2);
+    Armor* a = new Armor(e1, e2);
+    inv->add_element(a);
+    EXPECT_EQ(inv->size(), 1);
+}
+
 TEST(ItemTest, ArmorTest) {
     Inventory* inv = new Inventory();
     Equip* e1 = new Equip("Overalls");
