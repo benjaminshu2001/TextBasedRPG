@@ -36,19 +36,28 @@ int main() {
     Equip* eq1 = new Equip(5);
     Equip* eq2 = new Equip("Leather Overalls");
     Equip* eq3 = new Equip(3);
+    Equip* eq4 = new Equip("Test1");
+    Equip* eq5 = new Equip(1);
+    Equip* eq6 = new Equip("Test2");
+    Equip* eq7 = new Equip(2);
 
     Weapon* it = new Weapon(eq, eq1);
     Armor* ar = new Armor(eq2, eq3);
+    Armor* t1 = new Armor(eq4, eq5);
+    Armor* t2 = new Armor(eq6, eq7);
     
     Armor* test = new Armor(it, ar);
+    Armor* test1 = new Armor(t1, t2);
+    Armor* dummy = new Armor(test, test1);
     //Armor* it1 = new Armor("Leather Overalls", 2);
     //Item* it2 = new Item("Health Potion", 2, 3);
     inv->add_element(it);
     inv->add_element(ar);
+
     //inv->add_element(it1);
     //inv->add_element(it2);
     
-    InvIterator* iit = new InvIterator(test);
+    InvIterator* iit = new InvIterator(dummy);
     
     while(cin >> choice) {
         if(choice == 'A' || choice == 'a') {
