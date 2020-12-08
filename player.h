@@ -43,7 +43,15 @@ class Player : public Character {
         }
         void equip_weapon(Item* i) {
             if(is_weapon_equipped == true) {
-                cout << "Equipped weapon." << endl;
+                if(i->stringify() == weapon->stringify()) {
+                    cout << "This weapon has already equipped." << endl;
+                }
+                else if(i->stringify() != weapon->stringify()) {
+                    attackDamage -= weapon->get_right()->evaluate();
+                    weapon = i;
+                    attackDamage += i->get_right()->evaluate();
+                    is_weapon_equipped = true;
+                }
             }
             else {
                 attackDamage += i->get_right()->evaluate();
@@ -53,15 +61,22 @@ class Player : public Character {
         }
         void equip_armor(Item* i) {
             if(is_armor_equipped == true) {
-                cout << "Equipped armor." << endl;
+                if(i->stringify() == armor->stringify()) {
+                    cout << "This armor has already equipped." << endl;
+                }
+                else if(i->stringify() != armor->stringify()) {
+                    defense -= armor->get_right()->evaluate();
+                    armor = i;
+                    defense += i->get_right()->evaluate();
+                    is_armor_equipped = true;
+                }
             }
             else {
                 defense += i->get_right()->evaluate();
                 armor = i;
                 is_armor_equipped = true;
             }
-        }
-        
+        }    
         void print_stats() {
             string s = "Name: " + name + "\n======================\n" + "Health: " + to_string(health) + "\nMana: "
                         + to_string(mana) + "\nAttack: " + to_string(attackDamage) + "\nDefense: " + to_string(defense);
