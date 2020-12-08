@@ -27,6 +27,9 @@ class Armor : public Item {
         virtual double evaluate() {
             return right->evaluate();
         }
+        string print_name() {
+            return to_string(left->evaluate());
+        }
         virtual string stringify() {
             string s = to_string(right->evaluate());
             str = "Armor: " + left->stringify() + ", Defense: " + s;

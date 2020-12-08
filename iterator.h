@@ -5,7 +5,6 @@
 
 #include "item.h"
 #include "container.hpp"
-#include "inventory.h"
 
 class Item;
 

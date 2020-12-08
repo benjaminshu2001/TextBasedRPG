@@ -8,8 +8,7 @@
 #include "weapon.h"
 #include "equip.h"
 #include "bubble_sort.cpp"
-
-class InvIterator;
+class Iterator;
 
 using std::cout;
 using std::cin;
