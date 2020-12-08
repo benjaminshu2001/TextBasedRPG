@@ -1,98 +1,265 @@
-#include "player.h"
-#include "item.h"
-#include "inventory.cpp"
-#include "iterator.h"
 #include <iostream>
-#include <string>
-#include "armor.h"
-#include "weapon.h"
-#include "equip.h"
-#include "bubble_sort.cpp"
 
+#include "monster.hpp"
+#include "area.hpp"
+#include "player.h"
+//#include combatsystemclass
+#include "inventory.cpp"
+#include "item.h"
+#include "iterator.h"
+//#include "inv_iterator.cpp"
+#include "bubble_sort.cpp"
+#include "equip.h"
+ 
 class InvIterator;
 
-using std::cout;
-using std::cin;
+using namespace std;
+
+char startMenu(Area* Start);
+Player* createChar();
+void inventoryMenu(Inventory* I, InvIterator *ITT);
+void clearScreen();
+
 
 int main() {
-    string name;   
-    char choice;
+	
+	char input = 0;
+	Area* ThisRmPntr = 0;
+	Area* Begin = 0;	
+	string LastRmRC = "";
+	Player* Protagonist = 0;	
+	Inventory* Inv = 0;
+	
 
-    cout << "Hello, welcome to this text-based rpg game! This is currently named TestWorld." << endl;
+	input = startMenu(ThisRmPntr);
+	if ((input == 'z') || (input == 'Z')) {
+		cout << "Goodbye." << endl;
+		return 0;
+	}
 
-    cout << "Original, right? Anyways, if you will, tell us your name." << endl;
+	ThisRmPntr = ThisRmPntr->beginMap();
+	LastRmRC = ThisRmPntr->Refcode();
+	ThisRmPntr->referenceCode = ThisRmPntr->Refcode() + "(Here)";
+	Begin = ThisRmPntr;
+
+/*
+
+	cout << "Filling Map" << endl;
+
+	Area* Begin = new Area(0, "Start", "You are standing in front of the entrance into the dungeon.");
+	Begin->fillMap();	
+	ThisRmPntr = Begin;
+	LastRmRC = Begin->Refcode();
+	ThisRmPntr->referenceCode = ThisRmPntr->Refcode() + "(Here)";
+
+	cout << "Map Filled" << endl << endl << endl;
+
+*/
+
+	Protagonist = createChar();
+	Inv = new Inventory();
+
+	Equip* eq = new Equip("Wooden Sword");
+	Equip* eq1 = new Equip(5);
+	Equip* eq2 = new Equip("Leather Overalls");
+	Equip* eq3 = new Equip(3);
+
+	Equip* A = new Equip("A");
+	Equip* A1 = new Equip(1);
+	Equip* B = new Equip("B");
+	Equip* B1 = new Equip(2);
+	Equip* C = new Equip("C");
+	Equip* C1 = new Equip(3);
+	Equip* D = new Equip("D");
+	Equip* D1 = new Equip(4);
+	Equip* E = new Equip("E");
+	Equip* E1 = new Equip(5);
+	Equip* F = new Equip("F");
+	Equip* F1 = new Equip(6);
+
+
+	Weapon* it = new Weapon(eq, eq1);
+	Armor* ar = new Armor(eq2, eq3);
     
-    cout << "Name: ";
-    
-    cin >> name;
-    cout << endl;
+	Weapon* A2 = new Weapon(A, A1);
+	Weapon* B2 = new Weapon(B, B1);
+	Weapon* C2 = new Weapon(C, C1);
+	Armor* D2 = new Armor(D, D1);
+	Armor* E2 = new Armor(E, E1);
+	Armor* F2 = new Armor(F, F1);
 
-    Player* p = new Player(name, 10, 5, 2, 3);
-    
-    cout << "Hello, " <<  p->get_name() << ". Hope you enjoy your stay!" << endl;
-    cout << "What would you like to do? " << endl;
-    cout << "A = continue \nB = View inventory \nC = Check stats \nD = Quit" << endl;
-    Inventory* inv = new Inventory();
-    Equip* eq = new Equip("Sword");
-    Equip* eq1 = new Equip(5);
-    Equip* eq2 = new Equip("Leather Overalls");
-    Equip* eq3 = new Equip(3);
+	Inv->add_element(E2);
+	Inv->add_element(B2);
+	Inv->add_element(D2);
+	Inv->add_element(C2);	
+	Inv->add_element(A2);
+	Inv->add_element(F2);
 
-    Weapon* it = new Weapon(eq, eq1);
-    Armor* ar = new Armor(eq2, eq3);
-    
-    Armor* test = new Armor(it, ar);
-    //Armor* it1 = new Armor("Leather Overalls", 2);
-    //Item* it2 = new Item("Health Potion", 2, 3);
-    inv->add_element(it);
-    inv->add_element(ar);
-    //inv->add_element(it1);
-    //inv->add_element(it2);
-    
-    InvIterator* iit = new InvIterator(test);
-    
-    while(cin >> choice) {
-        if(choice == 'A' || choice == 'a') {
-            cout << "WIP, but this should continue the story!" << endl;
-            cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
-            p->equip_armor(ar);
-            p->equip_weapon(it);
-        }
-        else if(choice == 'B'|| choice == 'b') {
-            cout << "Viewing inventory..." << endl;
-            cout << "Here are the items that you currently have in your inventory: " << endl;
-            inv->print();
-            cout << "A = Inspect items \nB = Organize by Item Type\nC = Equip an item" << endl;
-            cin >> choice;
-            
-            if(choice == 'A' || choice == 'a') {
-                cout << iit->current()->stringify() << endl;
-                cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
+	Armor* test = new Armor(it, ar);	
+	Inv->add_element(it);
+        Inv->add_element(ar);	
+	
+	Protagonist->equip_armor(ar);
+	Protagonist->equip_weapon(it);
+
+	InvIterator* iit = new InvIterator(test);
+	
+
+	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z')) {
+		ThisRmPntr->CurrentLocation();
+		cout << "Area RefCode: " <<  ThisRmPntr->Refcode() << endl;
+		cin >> input;
+		cout << endl << endl << endl << endl << endl << endl << endl;		
+		if ((input == 'z') || (input == 'Z')) {
+			cout << "Goodbye, " << Protagonist->get_name() << "."  << endl;
+			return 0;
+		}
+		
+		else if ((input == 'i') || (input == 'I')) {
+			if (Inv->size() == 0) {
+				cout << "Your inventory is empty!" << endl << endl; 
+			}
+			else {
+				inventoryMenu(Inv, iit);
+				cout << endl << endl;	
+			}
+		}
+		
+		else if ((input == 'm') || (input == 'M')) {
+			Begin->PrintMap();
+			cout << endl << endl;
+		}
+		
+		else if ((input == 'e') || (input == 'E')) {
+			Protagonist->print_stats();
+			cout << endl << endl;
+		}
+
+		else if ((input == 'y') && (ThisRmPntr->Enemy != 0)) {
+			cout <<	ThisRmPntr->Enemy->desc() << endl;
+		}
+
+		else if ((input == 'x') && (ThisRmPntr->Enemy != 0)) {
+			if (ThisRmPntr->Enemy->health < 0) {
+				cout << "Monster is already dead!" << endl;
+			}
+			else {
+				cout << "Combat System not yet implemented!" << endl;
+			}	
+		}
+		else if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->West->Refcode();
+			ThisRmPntr = ThisRmPntr->West;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+			cout << "You have moved west." << endl << endl;
+		}
+		
+		else if ((input == 'd') && (ThisRmPntr->MoveChecker(2) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->East->Refcode();
+			ThisRmPntr = ThisRmPntr->East;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+			cout << "You have moved east." << endl << endl;
+		}
+
+		else if ((input == 'w') && (ThisRmPntr->MoveChecker(4) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->North->Refcode();
+			ThisRmPntr = ThisRmPntr->North;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+			cout << "You have moved north." << endl << endl;
+		}
+								
+		else if ((input == 's') && (ThisRmPntr->MoveChecker(3) == true)) {
+			ThisRmPntr->referenceCode = LastRmRC;
+			LastRmRC = ThisRmPntr->South->Refcode();
+			ThisRmPntr = ThisRmPntr->South;
+			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+			cout << "You have moved south." << endl << endl;		
+		}
+		
+		else {
+			cout << "Invalid Input!" << endl;
+		}
+
+	}
+
+	cout << "You have reached the end. Game Over." << endl;
+	
+	return 0;
+}
 
 
-            }
-            else if(choice == 'B' || choice == 'b') {
-                inv->set_sort_function(new BubbleSort());
-                inv->sort();
-                inv->print();
-            }
-        }
-        else if(choice == 'C' || choice == 'c') {
-            p->print_stats();
-        }
-        else if(choice == 'D') {
-            cout << "Goodbye!" << endl;
-            exit(1);
-        }
-        else {
-            cout << "Invalid input, please try again." << endl;
-        }
-        cout << endl << "What would you like to do? " << endl;
-        cout << "A = continue \nB = View inventory \nC = Check stats \nD = Quit" << endl;
-    }
-  
 
 
+char startMenu(Area* AreaStart) {
+	char input; 
 
-return 0;
+	clearScreen();
+
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ " << endl;
+	cout << "~                                                             ~ " << endl;
+	cout << "~	 	  Hello, welcome to (video game).	      ~ " << endl;
+	cout << "~ 		  Enter X to begin or Z to quit.	      ~	" << endl;
+	cout << "~        By: Dennis Chen, Benjamin Shu, and David Kim	      ~ " << endl;
+	cout << "~							      ~ " << endl;
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ "  << endl << endl << endl << endl << endl;
+	while ((input != 'x') && (input != 'z')) {						
+		cin >> input;				
+	}										
+	cout << endl << endl << endl;
+	return input;
+}
+
+
+Player* createChar() {
+	string PName;
+
+	clearScreen();	
+
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ " << endl;
+	cout << "~                                                           ~ " << endl;
+	cout << "~           Will you tell us your name, stranger?           ~ " << endl;
+	cout << "~							    ~ " << endl;
+	cout << " ~*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*~ " << endl;
+	cout << "Player Name: ";
+	cin >> PName;	
+	cout << endl << endl;
+	Player* Temp = new Player(PName, 10, 5, 2 ,3);
+
+	clearScreen();
+
+	cout << "Hello " << Temp->get_name() << ". We hope you enjoy your stay!" << endl;
+	return Temp;
+}
+
+void inventoryMenu(Inventory *I, InvIterator* IIT) {
+	char choice;
+
+	cout << "Here are the items that you currently have in your inventory: " << endl;
+        I->print();
+	cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
+        cin >> choice;
+
+	while ((choice != 'z') && (choice != 'Z')) {
+		if ((choice == 'a') || (choice == 'A')) {
+			I->print();	
+		}
+		if ((choice == 'b') || (choice == 'B')) {
+			I->set_sort_function(new BubbleSort());
+        	        I->sort();
+            	        I->print();
+		}
+		if ((choice == 'c') || (choice == 'C')) {
+			cout << "Do this later." << endl;
+		}
+		cin >> choice;
+	}
+}
+
+void clearScreen() {
+	for( int i = 0; i < 60; ++i ) {
+		cout << endl;
+	}
 }
