@@ -32,6 +32,9 @@ class Armor : public Item {
             str = "Armor: " + left->stringify() + ", Defense: " + s;
             return str;
         }
+        virtual bool get_type() {
+            return 0;
+        }
     private:
         Item* left; //name
         Item* right; //defense

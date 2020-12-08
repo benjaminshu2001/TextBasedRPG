@@ -17,7 +17,7 @@ using std::cin;
 int main() {
     string name;   
     char choice;
-    string item_choice;
+    int item_choice;
     cout << "Hello, welcome to this text-based rpg game! This is currently named TestWorld." << endl;
 
     cout << "Original, right? Anyways, if you will, tell us your name." << endl;
@@ -94,12 +94,19 @@ int main() {
                 inv->print();
             }
             else if(choice == 'C' || choice == 'c') {
-                cout << "Which item do you want to equip? Type the name of the equipment." << endl;
+                cout << "Which item do you want to equip? Type the position of the item in the inventory (0-" << inv->size() - 1 << ")" << endl;
                 inv->print();
-                cin.ignore();
+                cin >> item_choice;
+                if(inv->at(item_choice)->get_type() == 0) {
+                    p->equip_armor(inv->at(item_choice));
+                }
+                else if(inv->at(item_choice)->get_type() == 1) {
+                    p->equip_weapon(inv->at(item_choice));
+                }
+                /*cin.ignore();
                 getline(cin, item_choice);
                 if(item_choice == "Mace") {
-                    p->equip_weapon(w);
+                    p->equip_weapon(inv->at(2));
                 }
                 else if(item_choice == "Sword") {
                     p->equip_weapon(it);
@@ -113,6 +120,9 @@ int main() {
                 else if(item_choice == "Chainmail") {
                     p->equip_armor(b);
                 }
+                else if(item_choice == "Leather Overalls") {
+                    p->equip_armor(ar);
+                } */
             }
         }
         else if(choice == 'C' || choice == 'c') {

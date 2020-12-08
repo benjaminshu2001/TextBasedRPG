@@ -35,6 +35,9 @@ class Weapon : public Item {
             str = "Weapon: " + left->stringify() + ", Attack: " + s1;
             return str;
         }
+        virtual bool get_type() {
+            return 1;
+        }
     private:
         Item* left; //name
         Item* right; //attack amount

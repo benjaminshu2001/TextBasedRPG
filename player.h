@@ -41,6 +41,7 @@ class Player : public Character {
             }
             return true;
         }
+
         void equip_weapon(Item* i) {
             if(is_weapon_equipped == true) {
                 if(i->stringify() == weapon->stringify()) {
@@ -83,6 +84,7 @@ class Player : public Character {
             cout << s << endl;
             
         }
+
         std::string get_weapon() {
             string s = weapon->stringify();
             return s;
