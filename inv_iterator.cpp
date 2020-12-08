@@ -39,5 +39,4 @@ Item* InvIterator::current() {
     else if(this->c == right) {
         return this->self_ptr->get_right();
     }
-    return nullptr;
-}
+    return nullptr;}

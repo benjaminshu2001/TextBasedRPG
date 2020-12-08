@@ -3,8 +3,8 @@
 #include "item.h"
 #include "monster.hpp"
 #include "goblin.hpp"
-#include "ork.hpp"
-#include "minotaur.hpp"
+//#include "orc.hpp"
+//#include "minotaur.hpp"
 
 using namespace std;
 
@@ -97,8 +97,8 @@ class Area{
 			Monster* GobA = new Goblin(1, 1, 5);
 			Monster* GobB = new Goblin(3, 4, 10);
 			Monster* GobC = new Goblin(5, 5, 15);
-			Monster* OrkA = new Ork(8, 10, 20);
-			Monster* Mina = new Minotaur(15, 15, 30);
+			//Monster* OrkA = new Ork(8, 10, 20);
+			//Monster* Mina = new Minotaur(15, 15, 30);
 
 			this->AddNorthRoom(GobA, "A1", "You are in a hallway.");
 			this->North->AddNorthRoom(0, "A2", "You are in a hallway.");
@@ -118,14 +118,14 @@ class Area{
 			this->North->North->North->North->North->North->North->North->AddWestRoom(0, "F1", "");
 			this->North->North->North->North->North->North->North->North->AddEastRoom(0, "G1", "");
 			this->North->North->North->North->North->North->North->North->East->AddEastRoom(0, "G2", "");
-			this->North->North->North->North->North->North->North->North->AddNorthRoom(OrkA, "A9", "You are in a hallway.");
-			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(Mina, "A10", "");
+			this->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A9", "You are in a hallway.");
+			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "A10", "");
 			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "end", "This is the last room.");
 		}
 												
 		Area* beginMap() {
 			cout << "Beginning Map Construction..." << endl << endl;																	
-			Area* Begin = new Area(0, "Start", "You are standing in fron of the enterance into the dungeon.");
+			Area* Begin = new Area(0, "Start", "You are standing in fron of the entrance into the dungeon.");
 			Begin->fillMap();
 			
 			cout << "Map Construction Finished." << endl << endl << endl;

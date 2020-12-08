@@ -17,7 +17,7 @@ using namespace std;
 
 char startMenu(Area* Start);
 Player* createChar();
-void inventoryMenu(Inventory* I, InvIterator *ITT);
+void inventoryMenu(Inventory* I, InvIterator *ITT, Player* p);
 void clearScreen();
 
 
@@ -97,10 +97,10 @@ int main() {
 
 	Armor* test = new Armor(it, ar);	
 	Inv->add_element(it);
-        Inv->add_element(ar);	
+    Inv->add_element(ar);	
 	
-	Protagonist->equip_armor(Inv->at(1));
-	Protagonist->equip_weapon(Inv->at(0));
+	//Protagonist->equip_armor(Inv->at(1));
+	//Protagonist->equip_weapon(Inv->at(0));
 
 	InvIterator* iit = new InvIterator(test);
 	
@@ -120,7 +120,7 @@ int main() {
 				cout << "Your inventory is empty!" << endl << endl; 
 			}
 			else {
-				inventoryMenu(Inv, iit);
+				inventoryMenu(Inv, iit, Protagonist);
 				cout << endl << endl;	
 			}
 		}
@@ -132,11 +132,18 @@ int main() {
 		
 		else if ((input == 'e') || (input == 'E')) {
 			Protagonist->print_stats();
-			cout << "Equipped Weapon: ";
-//			Protagonist->get_weapon();
-			cout << endl << "Equipped Armor: ";
-//			Protagonist->get_armor(); 
-			cout << endl << endl;
+            if(Protagonist->weapon_equipped() == false) {
+                cout << endl << "Equipped Weapon: " << endl;
+            }
+            else if(Protagonist->weapon_equipped() == true) {
+                cout << endl << Protagonist->get_weapon() << endl;
+            }
+            if(Protagonist->armor_equipped() == false) {
+                cout << endl << "Equipped Armor: " << endl;
+            }
+            else {
+                cout << endl << Protagonist->get_armor() << endl;
+            }
 		}
 
 		else if ((input == 'y') && (ThisRmPntr->Enemy != 0)) {
@@ -238,16 +245,15 @@ Player* createChar() {
 	return Temp;
 }
 
-void inventoryMenu(Inventory *I, InvIterator* IIT) {
+void inventoryMenu(Inventory *I, InvIterator* IIT, Player* p ) {
 	char choice = 0;
-
+    int item_choice = 0;
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
 	cout << "==============================================================" << endl;
 
-
-
+    
 	while ((choice != 'z') && (choice != 'Z')) {
 		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
 		cin >> choice;
@@ -263,11 +269,18 @@ void inventoryMenu(Inventory *I, InvIterator* IIT) {
 		}
 		if ((choice == 'b') || (choice == 'B')) {
 			I->set_sort_function(new BubbleSort());
-        	        I->sort();
+        	I->sort();
 			cout << endl << "Inventory Sorted!" << endl;
 		}
 		if ((choice == 'c') || (choice == 'C')) {
 			cout << "Enter number of item in inventory list to equip or Z to exit" << endl;
+            cin >> item_choice;
+            if(I->at(item_choice)->get_type() == 0) {
+                p->equip_armor(I->at(item_choice));              
+            }
+            else if(I->at(item_choice)->get_type() == 1) {
+                p->equip_weapon(I->at(item_choice));
+            }
 			cout << endl;	
 		}
 //		cin >> choice;
