@@ -22,15 +22,18 @@ class Equip : public Item {
         Item* get_right() {
             return nullptr;
         }
-        //Item* create_iterator() {
-            //Iterator* iter = new InvIterator*(this);
-            //return iter;
-        //}
+        Iterator* create_iterator() {
+            Iterator* iter = new NullIterator(this);
+            return iter;
+        }
         virtual double evaluate() {
             return stat;
         }
         virtual string stringify() {
             return str;
+        }
+        virtual bool get_type() {
+            return 0;
         }
 };
 #endif

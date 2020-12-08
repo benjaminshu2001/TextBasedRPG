@@ -37,5 +37,17 @@ class InvIterator : public Iterator {
         bool is_done();
         Item* current();
 };
+class NullIterator : public Iterator {
+    public:
+        NullIterator(Item* ptr) : Iterator(ptr) {}
 
+        void first() {}
+        void next() {}
+        bool is_done() {
+            return true;
+        }
+        Item* current() { 
+            return nullptr; 
+        }
+};
 #endif
