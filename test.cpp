@@ -55,8 +55,9 @@ int main() {
         if(choice == 'A' || choice == 'a') {
             cout << "WIP, but this should continue the story!" << endl;
             cout << "Here is some starter gear. It has been equipped for you automatically." << endl;
-            p->equip_armor(ar);
-            p->equip_weapon(it);
+                p->equip_armor(ar);
+                p->equip_weapon(it);
+
         }
         else if(choice == 'B'|| choice == 'b') {
             cout << "Viewing inventory..." << endl;
@@ -79,6 +80,23 @@ int main() {
         }
         else if(choice == 'C' || choice == 'c') {
             p->print_stats();
+            cout << "A = Check your currently equipped items\nB = Back" << endl;
+            cin >> choice;
+            if(choice == 'A' || choice == 'a') {
+                if(p->weapon_equipped() == false) {
+                    cout << endl << "Weapon: " << "Nothing is equipped." << endl;
+                }
+                else if(p->weapon_equipped() == true){
+                    cout << endl << "Weapon: " << p->get_weapon() << endl;
+                }
+                if(p->armor_equipped() == false) {
+                    cout << endl << "Armor: " << "Nothing is equipped." << endl;
+                }
+                else {
+                    cout << endl << "Armor: " << p->get_armor() << endl;
+                }
+
+            }
         }
         else if(choice == 'D') {
             cout << "Goodbye!" << endl;
