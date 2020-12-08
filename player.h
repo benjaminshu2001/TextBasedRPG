@@ -7,6 +7,9 @@
 #include "character.h"
 #include "armor.h"
 #include "weapon.h"
+#include "attack_strategy.hpp"
+
+using namespace std;
 
 class Player : public Character {
     private:
@@ -108,6 +111,47 @@ class Player : public Character {
         double get_defense() {
             return defense;
         }
+        void decrement_mana(){
+            mana -= 1;
+        }
+
+    // --------------------------------------------------------------------------------------------------
+    // the attack client is the call to the attack strategy that can be executed within the player class.
+    // INPUT: int monster defense
+    //        within the function, cin collects the attack type
+    //        player attack is modified and mana is decremented if strong attack is chosen
+    // OUTPUT: double containing the value of player attack - monster defense
+    // --------------------------------------------------------------------------------------------------
+    double AttackClient(int d_monster){
+        string input;
+        AttackType *type = new AttackType(new NormalAttack);
+        while (true){
+            cout << "Select attack type:\n(1) Normal Attack\n(2) Strong Attack [uses 1 mana]" << endl;
+            cin >> input;
+            if (stoi(input) == "1"){
+                type->setAttack(new NormalAttack);
+                break;
+            }
+            else if (stoi(input) == "2"){
+                if (get_mana() > 0){
+                    type->setAttack(new StrongAttack);
+                    decrement_mana();
+                    break;
+                }
+                else {
+                    cout << "No more mana remaining." << endl;
+                }   
+            }
+            cout << "Invalid input, try again." << endl;
+        }
+    // with mana expended and the strategy selected, attack executes and calculates a double
+    // the double is to be used outside of the class to modify the monster's health
+        double output;
+        output = type->Attack(get_attack(), d_monster);
+        delete type;
+        return output;
+    }
+
 
 };
 
