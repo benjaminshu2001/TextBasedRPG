@@ -77,6 +77,11 @@ int main() {
                 inv->sort();
                 inv->print();
             }
+            else if(choice == 'C' || choice == 'c') {
+                cout << "Which item do you want to equip?" << endl;
+                inv->print();
+                cin >> choice;
+            }
         }
         else if(choice == 'C' || choice == 'c') {
             p->print_stats();
