@@ -18,6 +18,7 @@ class Item {
         virtual Item* get_left() = 0;
         virtual Item* get_right() = 0;    
         virtual bool get_type() = 0;
+        virtual void accept() = 0;
 
 };
 #endif
