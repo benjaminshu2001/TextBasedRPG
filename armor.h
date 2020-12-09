@@ -21,14 +21,14 @@ class Armor : public Item {
             return right;
         }
         Iterator* create_iterator() {
-            Iterator* iter = new InvIterator(this);
+            Iterator* iter = new BinaryIterator(this);
             return iter;
         }
         virtual double evaluate() {
             return right->evaluate();
         }
         string print_name() {
-            return to_string(left->evaluate());
+            return left->print_name();
         }
         virtual string stringify() {
             string s = to_string(right->evaluate());
@@ -37,6 +37,9 @@ class Armor : public Item {
         }
         virtual bool get_type() {
             return 0;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_armor();
         }
     private:
         Item* left; //name
