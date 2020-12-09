@@ -2,7 +2,7 @@
 #define __WEAPON_H__
 
 #include "item.h"
-#include "iterator.h"
+#include "visitor.h"
 
 #include <iostream>
 #include <string>
@@ -23,21 +23,27 @@ class Weapon : public Item {
         Item* get_right() {
             return right;
         }
-        Iterator* create_iterator() {
-            Iterator* iter = new InvIterator(this);
-            return iter;
-        }
         virtual double evaluate() {
             return right->evaluate();
         }
         virtual string stringify() {      
+        double evaluate() {
+            return right->evaluate();
+        }
+        string print_name() {
+            return left->print_name();
+        }
+        string stringify() {      
             string s1 = to_string(right->evaluate());
             str = "Weapon: " + left->stringify() + ", Attack: " + s1;
             return str;
         }
-        /*virtual string get_name() {
-            return left->get_name();
-        } */
+        virtual bool get_type() {
+            return 1;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_weapon();
+        }
     private:
         Item* left; //name
         Item* right; //attack amount

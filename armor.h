@@ -3,7 +3,7 @@
 
 #include "item.h"
 #include <string>
-#include "iterator.h"
+
 
 using namespace std;
 
@@ -20,20 +20,22 @@ class Armor : public Item {
         Item* get_right() {
             return right;
         }
-        Iterator* create_iterator() {
-            Iterator* iter = new InvIterator(this);
-            return iter;
-        }
         virtual double evaluate() {
             return right->evaluate();
         }
         string print_name() {
-            return to_string(left->evaluate());
+            return left->print_name();
         }
         virtual string stringify() {
             string s = to_string(right->evaluate());
             str = "Armor: " + left->stringify() + ", Defense: " + s;
             return str;
+        }
+        virtual bool get_type() {
+            return 0;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_armor();
         }
     private:
         Item* left; //name

@@ -37,8 +37,8 @@
  >   * We had picked this pattern because for a text-intensive game, there will be many functions that may overlap and because of that, we will be able to create an interface for families of related objects and algorithms. An example of the strategy pattern in this project would be creating algorithms for an “interact” feature, which would differ based on the object the user is interacting with. With the strategy pattern, we would define a family of algorithms, encapsulate them, and then incorporate them within the program. 
  > * Composite
  >   * We decided to use the composite design pattern because since we will have multiple objects/classes, we wanted to make the client and code less complex. It will make the code less complex by allowing us to reuse code in leaf classes, and make the client less complex by allowing it to treat composite and individual parts uniformly. A feature we will implement with this is us being able to implement new components into our code easier.
- > * Iterator
- >   * Our project uses the iterator design pattern because of our subsystems like inventory, which can hold some list of variables. We believe that using the iterator pattern will allow us to see what is in our inventory container faster and simpler. The feature we will be implementing with iterator is being able to traverse containers.
+ > * Visitor
+ >   * Our project uses the visitor design pattern because of our subsystems like inventory, which can hold some list of variables. We believe that using the visitor pattern will allow us to see what is in our inventory container through the amount of visits per type of equipment. The feature we will be implementing with visitor is being able to list the amount of each type of item (armor and weapon in this inventory system).
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
  > * Set up your GitHub project board as a Kanban board for the project. It should have columns that map roughly to 
@@ -62,10 +62,9 @@
  This is the composite pattern, which allows us to traverse through areas within our game. Within each area, we are allowed to move in a direction and fight monsters if 
  there are any present. By utilizing the composite pattern, we are able to traverse through many different types of areas based on one's location.
  
- ![iterator pattern](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/iterator_design_pattern.png?raw=true)
+ ![visitor pattern](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/visitor_design_pattern.png?raw=true)
  
- This is the iterator pattern, where we iterate through the player's inventory system. Each item will be easily accessable because of this design pattern, which will
- help reduce the complexity and increase efficiency of traversing through a player's acquired items. 
+ This is the visitor pattern, where we can obtain the count of each type of equipment in the player's inventory system. Each item will be visited and accepted, which causes flow of control in order to obtain full object control. This adds additional information to the user and allows ut to define a new operation without changing the classes (in this instance, the types of items stored in the inventory). 
  
  > ## Phase III
  > You will need to schedule a check-in with the TA (during lab hours or office hours). Your entire team must be present. 

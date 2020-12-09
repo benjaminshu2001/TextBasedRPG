@@ -8,7 +8,7 @@
 
 class Item;
 
-enum ChildIndicator { left, right, end };
+enum ChildIndicator { left, right, end};
 
 class Iterator {
     protected:
@@ -27,7 +27,7 @@ class Iterator {
 
 class InvIterator : public Iterator {
     protected:
-        ChildIndicator c;
+        std::stack<Iterator*> iterators;
 
     public:
         InvIterator(Item* ptr);
@@ -37,5 +37,29 @@ class InvIterator : public Iterator {
         bool is_done();
         Item* current();
 };
+class BinaryIterator : public Iterator {
+    protected:
+        ChildIndicator c;
 
+    public:
+        BinaryIterator(Item* ptr);
+
+        void first();
+        void next();
+        bool is_done();
+        Item* current();
+};
+class NullIterator : public Iterator {
+    public:
+        NullIterator(Item* ptr) : Iterator(ptr) {}
+
+        void first() {}
+        void next() {}
+        bool is_done() {
+            return true;
+        }
+        Item* current() { 
+            return nullptr; 
+        }
+};
 #endif

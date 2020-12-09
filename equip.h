@@ -2,8 +2,8 @@
 #define __EQUIP_H__
 
 #include "item.h"
-#include "iterator.h"
 #include <string>
+#include "visitor.h"
 
 class Equip : public Item {
     public:
@@ -22,15 +22,20 @@ class Equip : public Item {
         Item* get_right() {
             return nullptr;
         }
-        //Item* create_iterator() {
-            //Iterator* iter = new InvIterator*(this);
-            //return iter;
-        //}
         virtual double evaluate() {
             return stat;
         }
         virtual string stringify() {
             return str;
+        }
+        virtual bool get_type() {
+            return 0;
+        }
+        virtual string print_name() {
+            return str;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_equip();
         }
 };
 #endif
