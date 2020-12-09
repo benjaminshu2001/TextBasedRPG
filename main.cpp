@@ -106,7 +106,6 @@ int main() {
             		}
                		else {
                 		cout << endl << Protagonist->get_armor() << endl << endl;
-                		cout << Protagonist->get_armor() << endl;
             		}		
 	       }
 
