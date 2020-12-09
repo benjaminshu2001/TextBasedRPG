@@ -2,7 +2,7 @@
 #define __WEAPON_H__
 
 #include "item.h"
-#include "iterator.h"
+#include "visitor.h"
 
 #include <iostream>
 #include <string>
@@ -22,10 +22,6 @@ class Weapon : public Item {
         }
         Item* get_right() {
             return right;
-        }
-        Iterator* create_iterator() {
-            Iterator* iter = new BinaryIterator(this);
-            return iter;
         }
         double evaluate() {
             return right->evaluate();
