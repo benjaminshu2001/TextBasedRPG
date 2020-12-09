@@ -1,7 +1,6 @@
 #include "player.h"
 #include "item.h"
 #include "inventory.cpp"
-#include "iterator.h"
 #include <iostream>
 #include <string>
 #include "armor.h"
@@ -64,6 +63,11 @@ int main() {
     //Item* it2 = new Item("Health Potion", 2, 3);
     inv->add_element(it);
     inv->add_element(ar);
+
+    //inv->add_element(it1);
+    //inv->add_element(it2);
+    
+    
     inv->add_element(w);
     inv->add_element(w1);
     inv->add_element(a);

@@ -1,7 +1,6 @@
 #ifndef __INVENTORY_H__
 #define __INVENTORY_H__
 
-
 #include "container.hpp"
 #include <iostream>
 #include <vector>

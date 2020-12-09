@@ -49,7 +49,7 @@ class Player : public Character {
         void equip_weapon(Item* i) {
             if(is_weapon_equipped == true) {
                 if(i->stringify() == weapon->stringify()) {
-                    cout << "This weapon has already equipped." << endl;
+                    cout << "This weapon has already been equipped." << endl;
                 }
                 else if(i->stringify() != weapon->stringify()) {
                     attackDamage -= weapon->get_right()->evaluate();
@@ -67,7 +67,7 @@ class Player : public Character {
         void equip_armor(Item* i) {
             if(is_armor_equipped == true) {
                 if(i->stringify() == armor->stringify()) {
-                    cout << "This armor has already equipped." << endl;
+                    cout << "This armor has already been equipped." << endl;
                 }
                 else if(i->stringify() != armor->stringify()) {
                     defense -= armor->get_right()->evaluate();
