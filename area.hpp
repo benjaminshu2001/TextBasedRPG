@@ -47,7 +47,7 @@ class Area{
 		void CurrentLocation() {
 			cout << description << endl;
 
-			if (Enemy != 0) {
+			if ((Enemy != 0) && (Enemy->health > 0)) {
 				cout << "There is a " << Enemy->name << " in this room." << endl;
 			}
 			if (Loot != 0) {
@@ -71,7 +71,7 @@ class Area{
 				}
 				cout << endl << "Enter I to view inventory, M to view map, E to examine self, ";
 				
-				if (Enemy != 0) {
+				if ((Enemy != 0) && (Enemy->health > 0)) {
 					cout << "Y to view monster details, X to fight monster, ";
 				}
 			
