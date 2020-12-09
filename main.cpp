@@ -7,7 +7,7 @@
 #include "inventory.cpp"
 #include "item.h"
 #include "iterator.h"
-//#include "inv_iterator.cpp"
+#include "visitor.h"
 #include "bubble_sort.cpp"
 #include "equip.h"
  
@@ -17,7 +17,7 @@ using namespace std;
 
 char startMenu(Area* Start);
 Player* createChar();
-void inventoryMenu(Inventory* I, InvIterator *ITT, Player* p);
+void inventoryMenu(Inventory* I, Player* p, Visitor* v);
 void clearScreen();
 vector<Item*> createLoot();
 
@@ -63,9 +63,8 @@ int main() {
 	
 	Protagonist->equip_armor(Inv->at(1));
 	Protagonist->equip_weapon(Inv->at(0));
-
-	InvIterator* iit = new InvIterator(test);
 	
+    Visitor* v = new Visitor();
 
 	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z')) {
 		ThisRmPntr->CurrentLocation();
@@ -82,7 +81,7 @@ int main() {
 				cout << "Your inventory is empty!" << endl << endl; 
 			}
 			else {
-				inventoryMenu(Inv, iit, Protagonist);
+				inventoryMenu(Inv, Protagonist, v);
 				cout << endl << endl;	
 			}
 		}
@@ -224,9 +223,12 @@ Player* createChar() {
 	return Temp;
 }
 
-void inventoryMenu(Inventory *I, InvIterator* IIT, Player* p ) {
+void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 	char choice = 0;
     int item_choice = 0;
+    bool visit_counted = false;
+    int inv_size = I->size();
+
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
@@ -234,7 +236,7 @@ void inventoryMenu(Inventory *I, InvIterator* IIT, Player* p ) {
 
     
 	while ((choice != 'z') && (choice != 'Z')) {
-		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
+		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item,or Z to return to main screen." << endl;
 		cin >> choice;
 		cout << endl << endl << endl;
 
@@ -243,6 +245,18 @@ void inventoryMenu(Inventory *I, InvIterator* IIT, Player* p ) {
 			cout << "==============================================================" << endl;
 			cout << "Here are the that items you currently have in your inventory: " << endl << endl ;
 			I->print();	
+            if(visit_counted == true && inv_size == I->size()) {
+                cout << "Armor count: " << v->armor_count() << endl;
+                cout << "Weapon count: " << v->weapon_count() << endl;
+            }
+            if(visit_counted == false) {
+                for(int i = 0; i < I->size(); i++) {
+                    I->at(i)->accept(v);
+                }
+                visit_counted = true;
+                cout << "Armor count: " << v->armor_count() << endl;
+                cout << "Weapon count: " << v->weapon_count() << endl;
+            }
 			cout << "==============================================================" << endl;
 			cout << endl;
 		}
