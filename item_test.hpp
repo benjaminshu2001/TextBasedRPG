@@ -132,15 +132,16 @@ TEST(PlayerTest, WholePlayerTest) {
     inv->add_element(spear);
     inv->add_element(odm_boot);
     inv->print();
-    p->print_stats();
-    cout << "Equipping gear..." << endl << endl;
+
     p->equip_weapon(spear);
     p->equip_armor(odm_helmet);
     p->equip_armor(odm_chest);
     p->equip_armor(odm_leg);
     p->equip_armor(odm_boot);
+    
+    EXPECT_EQ(p->get_attack(), 155);
 
-    p->print_stats();
+    
 
 }
 #endif

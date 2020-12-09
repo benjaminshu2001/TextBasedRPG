@@ -27,5 +27,14 @@ class Visitor {
         int weapon_count() {
             return weapons;
         }
+        void reset_equip() {
+            equips = 0;
+        }
+        void reset_weapon() {
+            weapons = 0;
+        }
+        void reset_armor() {
+            armors = 0;
+        }
 };
 #endif
