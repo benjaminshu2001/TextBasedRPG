@@ -6,12 +6,13 @@ ADD_SUBDIRECTORY(googletest)
 SET(CMAKE_CXX_STANDARD 11)
 
 ADD_EXECUTABLE(test
-
     unit_test.cpp
     inventory.cpp
     bubble_sort.cpp
+)
 
-
+ADD_EXECUTABLE(atktest
+    attack_test.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
