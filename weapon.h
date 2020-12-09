@@ -22,7 +22,7 @@ class Weapon : public Item {
         }
         Item* get_right() {
             return right;
-        }
+        }   
         double evaluate() {
             return right->evaluate();
         }

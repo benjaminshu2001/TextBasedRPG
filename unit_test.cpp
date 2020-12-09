@@ -2,7 +2,6 @@
 
 #include "item.h"
 #include "armor.h"
-#include "iterator.h"
 #include "weapon.h"
 #include "player.h"
 #include "item_test.hpp"
