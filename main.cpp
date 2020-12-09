@@ -12,7 +12,6 @@
 #include "bubble_sort.cpp"
 #include "equip.h"
  
-class InvIterator;
 
 using namespace std;
 
@@ -106,6 +105,7 @@ int main() {
                 		cout <<  "Equipped Armor: None" << endl;
             		}
                		else {
+                		cout << endl << Protagonist->get_armor() << endl << endl;
                 		cout << Protagonist->get_armor() << endl;
             		}		
 	       }
@@ -235,11 +235,11 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
-	cout << "==============================================================" << endl;
+	cout << "==============================================================" << endl << endl;
 
     
 	while ((choice != 'z') && (choice != 'Z')) {
-		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item,or Z to return to main screen." << endl;
+		cout << "Enter A to list inventory items, B to organize by item type, C to equip an item, or Z to return to main screen." << endl;
 		cin >> choice;
 		cout << endl << endl << endl;
 
@@ -248,20 +248,20 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 			cout << "==============================================================" << endl;
 			cout << "Here are the that items you currently have in your inventory: " << endl << endl ;
 			I->print();	
-            			if(visit_counted == true && inv_size == I->size()) {
-                			cout << "Armor count: " << v->armor_count() << endl;
-                			cout << "Weapon count: " << v->weapon_count() << endl;
-            			}
-               			if(visit_counted == false) {
-					for(int i = 0; i < I->size(); i++) {
-                 				I->at(i)->accept(v);
-               				}
-               				visit_counted = true;
-                			cout << "Armor count: " << v->armor_count() << endl;
-                			cout << "Weapon count: " << v->weapon_count() << endl;
-            			}
-				cout << "==============================================================" << endl;
-				cout << endl;
+            if(visit_counted == true && inv_size == I->size()) {
+                cout << "Armor count: " << v->armor_count() << endl;
+                cout << "Weapon count: " << v->weapon_count() << endl;
+            }
+            if(visit_counted == false) {
+                for(int i = 0; i < I->size(); i++) {
+                    I->at(i)->accept(v);
+                }
+                visit_counted = true;
+                cout << "Armor count: " << v->armor_count() << endl;
+                cout << "Weapon count: " << v->weapon_count() << endl;
+            }
+			cout << "==============================================================" << endl;
+			cout << endl << endl;
 		}
 
 		if ((choice == 'b') || (choice == 'B')) {
