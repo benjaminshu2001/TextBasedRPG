@@ -10,7 +10,6 @@
 #include "bubble_sort.cpp"
 #include "equip.h"
  
-class InvIterator;
 
 using namespace std;
 
@@ -102,7 +101,7 @@ int main() {
                 		cout << endl << "Equipped Armor: None" << endl;
             		}
                		else {
-                		cout << endl << Protagonist->get_armor() << endl;
+                		cout << endl << Protagonist->get_armor() << endl << endl;
             		}		
 	       }
 
@@ -231,11 +230,11 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
-	cout << "==============================================================" << endl;
+	cout << "==============================================================" << endl << endl;
 
     
 	while ((choice != 'z') && (choice != 'Z')) {
-		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item,or Z to return to main screen." << endl;
+		cout << "Enter A to list inventory items, B to organize by item type, C to equip an item, or Z to return to main screen." << endl;
 		cin >> choice;
 		cout << endl << endl << endl;
 
@@ -257,7 +256,7 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
                 cout << "Weapon count: " << v->weapon_count() << endl;
             }
 			cout << "==============================================================" << endl;
-			cout << endl;
+			cout << endl << endl;
 		}
 		if ((choice == 'b') || (choice == 'B')) {
 			I->set_sort_function(new BubbleSort());
@@ -265,15 +264,14 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 			cout << endl << "Inventory Sorted!" << endl;
 		}
 		if ((choice == 'c') || (choice == 'C')) {
-			cout << "Enter number of item in inventory list (0-" << I->size() << ") to equip or Z to exit" << endl;
+			cout << "Enter number of item in inventory list (0-" << I->size() - 1 << ") to equip or Z to exit" << endl;
             cin >> item_choice;
             if(I->at(item_choice)->get_type() == 0) {
                 p->equip_armor(I->at(item_choice));              
             }
             else if(I->at(item_choice)->get_type() == 1) {
                 p->equip_weapon(I->at(item_choice));
-            }
-			cout << endl;	
+           }	
 		}
 //		cin >> choice;
 	}

@@ -137,7 +137,7 @@ class Area{
 												
 		Area* beginMap() {
 			cout << "Beginning Map Construction..." << endl << endl;																	
-			Area* Begin = new Area(0, "Start", "You are standing in fron of the entrance into the dungeon.", 0);
+			Area* Begin = new Area(0, "Start", "You are standing in front of the entrance into the dungeon.", 0);
 			Begin->fillMap();														
 												
 			cout << "Map Construction Finished." << endl << endl << endl;
