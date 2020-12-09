@@ -24,11 +24,14 @@ class Weapon : public Item {
             return right;
         }
         Iterator* create_iterator() {
-            Iterator* iter = new InvIterator(this);
+            Iterator* iter = new BinaryIterator(this);
             return iter;
         }
         double evaluate() {
             return right->evaluate();
+        }
+        string print_name() {
+            return left->print_name();
         }
         string stringify() {      
             string s1 = to_string(right->evaluate());
@@ -37,6 +40,9 @@ class Weapon : public Item {
         }
         virtual bool get_type() {
             return 1;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_weapon();
         }
     private:
         Item* left; //name

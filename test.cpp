@@ -8,6 +8,8 @@
 #include "weapon.h"
 #include "equip.h"
 #include "bubble_sort.cpp"
+#include "visitor.h"
+
 class Iterator;
 
 using std::cout;
@@ -17,6 +19,7 @@ int main() {
     string name;   
     char choice;
     int item_choice;
+    bool visit_counted = false;
     cout << "Hello, welcome to this text-based rpg game! This is currently named TestWorld." << endl;
 
     cout << "Original, right? Anyways, if you will, tell us your name." << endl;
@@ -55,6 +58,8 @@ int main() {
     Armor* test = new Armor(it, ar);
     Weapon* test1 = new Weapon(w, w1);
     Armor* test2 = new Armor(a, b);
+
+    Armor* dummy = new Armor(test, test1);
     //Armor* it1 = new Armor("Leather Overalls", 2);
     //Item* it2 = new Item("Health Potion", 2, 3);
     inv->add_element(it);
@@ -63,11 +68,11 @@ int main() {
     inv->add_element(w1);
     inv->add_element(a);
     inv->add_element(b);
-    //inv->add_element(it1);
-    //inv->add_element(it2);
-    
-    InvIterator* iit = new InvIterator(test);
-    
+
+    int inv_size = inv->size();
+  
+    Visitor* v = new Visitor();
+
     while(cin >> choice) {
         if(choice == 'A' || choice == 'a') {
             cout << "WIP, but this should continue the story!" << endl;
@@ -84,8 +89,18 @@ int main() {
             cin >> choice;
             
             if(choice == 'A' || choice == 'a') {
-                cout << iit->current()->stringify() << endl;
-                inv->print();
+                if(visit_counted == true && inv_size == inv->size()) {
+                    cout << "Armor count: " << v->armor_count() << endl;
+                    cout << "Weapon count: " << v->weapon_count() << endl;
+                }               
+                if(visit_counted == false) {
+                    for(int i = 0; i < inv->size(); i++) {
+                        inv->at(i)->accept(v);
+                    }
+                    visit_counted = true;
+                    cout << "Armor count: " << v->armor_count() << endl;
+                    cout << "Weapon count: " << v->weapon_count() << endl;                   
+                }
             }
             else if(choice == 'B' || choice == 'b') {
                 inv->set_sort_function(new BubbleSort());
@@ -143,7 +158,7 @@ int main() {
                 }
             }
         }
-        else if(choice == 'D') {
+        else if(choice == 'D' || choice == 'd') {
             cout << "Goodbye!" << endl;
             exit(1);
         }

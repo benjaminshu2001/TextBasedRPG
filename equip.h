@@ -4,6 +4,7 @@
 #include "item.h"
 #include "iterator.h"
 #include <string>
+#include "visitor.h"
 
 class Equip : public Item {
     public:
@@ -34,6 +35,12 @@ class Equip : public Item {
         }
         virtual bool get_type() {
             return 0;
+        }
+        virtual string print_name() {
+            return str;
+        }
+        virtual void accept(Visitor* v) {
+            v->visit_equip();
         }
 };
 #endif

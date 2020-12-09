@@ -17,9 +17,9 @@ using namespace std;
 
 char startMenu(Area* Start);
 Player* createChar();
-void inventoryMenu(Inventory* I, InvIterator *ITT);
+void inventoryMenu(Inventory* I, InvIterator *ITT, Player* p);
 void clearScreen();
-
+vector<Item*> createLoot();
 
 int main() {
 	
@@ -29,7 +29,8 @@ int main() {
 	string LastRmRC = "";
 	Player* Protagonist = 0;	
 	Inventory* Inv = 0;
-	
+	vector<Item*> gameLoot;	
+
 
 	input = startMenu(ThisRmPntr);
 	if ((input == 'z') || (input == 'Z')) {
@@ -42,62 +43,23 @@ int main() {
 	ThisRmPntr->referenceCode = ThisRmPntr->Refcode() + "(Here)";
 	Begin = ThisRmPntr;
 
-/*
-
-	cout << "Filling Map" << endl;
-
-	Area* Begin = new Area(0, "Start", "You are standing in front of the entrance into the dungeon.");
-	Begin->fillMap();	
-	ThisRmPntr = Begin;
-	LastRmRC = Begin->Refcode();
-	ThisRmPntr->referenceCode = ThisRmPntr->Refcode() + "(Here)";
-
-	cout << "Map Filled" << endl << endl << endl;
-
-*/
 
 	Protagonist = createChar();
 	Inv = new Inventory();
+	gameLoot = createLoot();
 
 	Equip* eq = new Equip("Wooden Sword");
 	Equip* eq1 = new Equip(5);
 	Equip* eq2 = new Equip("Leather Overalls");
 	Equip* eq3 = new Equip(3);
 
-	Equip* A = new Equip("A");
-	Equip* A1 = new Equip(1);
-	Equip* B = new Equip("B");
-	Equip* B1 = new Equip(2);
-	Equip* C = new Equip("C");
-	Equip* C1 = new Equip(3);
-	Equip* D = new Equip("D");
-	Equip* D1 = new Equip(4);
-	Equip* E = new Equip("E");
-	Equip* E1 = new Equip(5);
-	Equip* F = new Equip("F");
-	Equip* F1 = new Equip(6);
-
 
 	Weapon* it = new Weapon(eq, eq1);
 	Armor* ar = new Armor(eq2, eq3);
-    
-	Weapon* A2 = new Weapon(A, A1);
-	Weapon* B2 = new Weapon(B, B1);
-	Weapon* C2 = new Weapon(C, C1);
-	Armor* D2 = new Armor(D, D1);
-	Armor* E2 = new Armor(E, E1);
-	Armor* F2 = new Armor(F, F1);
-
-	Inv->add_element(E2);
-	Inv->add_element(B2);
-	Inv->add_element(D2);
-	Inv->add_element(C2);	
-	Inv->add_element(A2);
-	Inv->add_element(F2);
 
 	Armor* test = new Armor(it, ar);	
 	Inv->add_element(it);
-        Inv->add_element(ar);	
+	Inv->add_element(ar);	
 	
 	Protagonist->equip_armor(Inv->at(1));
 	Protagonist->equip_weapon(Inv->at(0));
@@ -120,7 +82,7 @@ int main() {
 				cout << "Your inventory is empty!" << endl << endl; 
 			}
 			else {
-				inventoryMenu(Inv, iit);
+				inventoryMenu(Inv, iit, Protagonist);
 				cout << endl << endl;	
 			}
 		}
@@ -132,16 +94,23 @@ int main() {
 		
 		else if ((input == 'e') || (input == 'E')) {
 			Protagonist->print_stats();
-			cout << "Equipped Weapon: ";
-//			Protagonist->get_weapon();
-			cout << endl << "Equipped Armor: ";
-//			Protagonist->get_armor(); 
-			cout << endl << endl;
-		}
+        		if(Protagonist->weapon_equipped() == false) {
+               			 cout << endl << "Equipped Weapon: None" << endl;
+            		}
+       		        else if(Protagonist->weapon_equipped() == true) {
+               			 cout << endl << Protagonist->get_weapon() << endl;
+           		}
+            		if(Protagonist->armor_equipped() == false) {
+                		cout << endl << "Equipped Armor: None" << endl;
+            		}
+               		else {
+                		cout << endl << Protagonist->get_armor() << endl;
+            		}		
+	       }
 
-		else if ((input == 'y') && (ThisRmPntr->Enemy != 0)) {
+	       else if ((input == 'y') && (ThisRmPntr->Enemy != 0)) {
 			cout <<	ThisRmPntr->Enemy->desc() << endl;
-		}
+	       }
 
 		else if ((input == 'x') && (ThisRmPntr->Enemy != 0)) {
 			if (ThisRmPntr->Enemy->health < 0) {
@@ -151,6 +120,23 @@ int main() {
 				cout << "Combat System not yet implemented!" << endl;
 			}	
 		}
+
+		else if (((input == 'l') || (input == 'L')) && (ThisRmPntr->Loot != 0)) {
+			if (ThisRmPntr->Enemy == 0) {		
+				Inv->add_element(gameLoot.at(ThisRmPntr->Loot));
+				cout << "Looted: " << gameLoot.at(ThisRmPntr->Loot)->stringify() << endl;
+				ThisRmPntr->Loot = 0;
+			}									
+			else if (ThisRmPntr->Enemy->health <= 0) {
+				Inv->add_element(gameLoot.at(ThisRmPntr->Loot));
+				cout << "Looted: " << gameLoot.at(ThisRmPntr->Loot)->stringify() << endl;
+				ThisRmPntr->Loot = 0;
+			}										
+			else {
+				cout << "Cannot loot! You must first defeat the monster!" << endl;
+			}								
+		}
+ 
 		else if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
 			ThisRmPntr->referenceCode = LastRmRC;
 			LastRmRC = ThisRmPntr->West->Refcode();
@@ -238,16 +224,15 @@ Player* createChar() {
 	return Temp;
 }
 
-void inventoryMenu(Inventory *I, InvIterator* IIT) {
+void inventoryMenu(Inventory *I, InvIterator* IIT, Player* p ) {
 	char choice = 0;
-
+    int item_choice = 0;
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
         I->print();
 	cout << "==============================================================" << endl;
 
-
-
+    
 	while ((choice != 'z') && (choice != 'Z')) {
 		cout << "Enter A to list inventory items, B to organize by Item Type, C to equip an item, or Z to return to main screen." << endl;
 		cin >> choice;
@@ -263,11 +248,18 @@ void inventoryMenu(Inventory *I, InvIterator* IIT) {
 		}
 		if ((choice == 'b') || (choice == 'B')) {
 			I->set_sort_function(new BubbleSort());
-        	        I->sort();
+        	I->sort();
 			cout << endl << "Inventory Sorted!" << endl;
 		}
 		if ((choice == 'c') || (choice == 'C')) {
 			cout << "Enter number of item in inventory list to equip or Z to exit" << endl;
+            cin >> item_choice;
+            if(I->at(item_choice)->get_type() == 0) {
+                p->equip_armor(I->at(item_choice));              
+            }
+            else if(I->at(item_choice)->get_type() == 1) {
+                p->equip_weapon(I->at(item_choice));
+            }
 			cout << endl;	
 		}
 //		cin >> choice;
@@ -278,4 +270,45 @@ void clearScreen() {
 	for( int i = 0; i < 60; ++i ) {
 		cout << endl;
 	}
+}
+
+
+vector<Item*> createLoot() {
+	vector<Item*> LT;
+	
+	Equip* dm = new Equip("Dummy");
+	Equip* dm1 = new Equip(0);
+
+	Weapon* DM = new Weapon(dm, dm1);
+
+	Equip* A = new Equip("Shortsword");
+	Equip* A1 = new Equip(6);
+	Equip* B = new Equip("Longsword");
+	Equip* B1 = new Equip(8);
+	Equip* C = new Equip("Mace");
+	Equip* C1 = new Equip(11);
+	Equip* D = new Equip("Chainmail Vest");
+	Equip* D1 = new Equip(5);
+	Equip* E = new Equip("Scale Armor");
+	Equip* E1 = new Equip(8);
+	Equip* F = new Equip("Platemail Armor");
+	Equip* F1 = new Equip(15);
+
+    
+	Weapon* SS = new Weapon(A, A1);
+	Weapon* LS = new Weapon(B, B1);
+	Weapon* MA = new Weapon(C, C1);
+	Armor* CV = new Armor(D, D1);
+	Armor* SA = new Armor(E, E1);
+	Armor* PA = new Armor(F, F1);
+	
+	LT.push_back(DM);
+	LT.push_back(SS);
+	LT.push_back(LS);
+	LT.push_back(MA);
+	LT.push_back(CV);	
+	LT.push_back(SA);
+	LT.push_back(PA);
+	
+	return LT;
 }
