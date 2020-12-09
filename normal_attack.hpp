@@ -3,14 +3,15 @@
 
 #include <iostream>
 #include <string>
+#include "attack_strategy.hpp"
 
-using namespace std;
-
-class NormalAttack {
+class NormalAttack : public AttackStrategy {
 	public:
-		double execute_attack(int attack, int monsterDef){
+		double execute_attack(int &attack, int &monsterDef){
+					//	cout << "(TEST) monsterDef inside execute_attack = " << monsterDef;
 			double result;
 			result = attack - monsterDef;
+					//	cout << "(TEST) result before return = " << result;
 			return result;
 		}
 };

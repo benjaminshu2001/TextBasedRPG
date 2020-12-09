@@ -7,7 +7,8 @@
 #include "character.h"
 #include "armor.h"
 #include "weapon.h"
-#include "attack_strategy.hpp"
+#include "strong_attack.hpp"
+#include "normal_attack.hpp"
 
 using namespace std;
 
@@ -127,15 +128,22 @@ class Player : public Character {
         AttackType *type = new AttackType(new NormalAttack);
         while (true){
             cout << "Select attack type:\n(1) Normal Attack\n(2) Strong Attack [uses 1 mana]" << endl;
+	    double input;
             cin >> input;
-            if (stoi(input) == "1"){
+            if (input == 1){
                 type->setAttack(new NormalAttack);
-                break;
+               	cout << "normal attack selected." << endl;
+		break;
             }
-            else if (stoi(input) == "2"){
-                if (get_mana() > 0){
+            if (input == 2){
+		double mana_val = get_mana();
+					//	cout << "(TEST) INIT MANA = " << mana_val << endl;
+                if (mana_val > 0.0){
                     type->setAttack(new StrongAttack);
+					//	cout << "(TEST) MANA = " << get_mana() << endl;
                     decrement_mana();
+					//	cout << "(TEST) MANA = " << get_mana() << endl;
+		    cout << "strong attack selected." << endl;
                     break;
                 }
                 else {
@@ -147,6 +155,9 @@ class Player : public Character {
     // with mana expended and the strategy selected, attack executes and calculates a double
     // the double is to be used outside of the class to modify the monster's health
         double output;
+
+					//	cout << "(TEST) ATK = " << get_attack() << endl;
+					//	cout << "(TEST) D_MONSTER = " << d_monster << endl;
         output = type->Attack(get_attack(), d_monster);
         delete type;
         return output;

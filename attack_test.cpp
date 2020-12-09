@@ -14,16 +14,26 @@ using std::cout;
 using std::cin;
 
 int main() {
-    string name = "Test Name"
+    string name = "Test Name";
     int h = 10;
     int d = 2;
-    int m = 1;
-    int atkdmg = 10;
-    int monster_def = 10
+    int m;
+    int atkdmg;
+    int monster_def;
 
-    Player* p = new Player(name, h, d, m, atkdmg);
-    p->AttackClient(monster_def);
+    cout << "(TEST) enter atkdmg: ";
+    cin >> atkdmg;
 
+    cout << endl << "(TEST) enter monster_def: ";
+    cin >> monster_def;
+
+    cout << endl << "(TEST) enter mana: ";
+    cin >> m;
+    cout << endl;
+
+    Player* p = new Player(name, h, m, d, atkdmg);
+    cout << p->AttackClient(monster_def) << endl;
+	
     
 return 0;
 

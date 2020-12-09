@@ -3,12 +3,11 @@
 
 #include <iostream>
 #include <string>
+#include "attack_strategy.hpp"
 
-using namespace std;
-
-class StrongAttack {
+class StrongAttack : public AttackStrategy {
 	public:
-		double execute_attack(int attack, int monsterDef){
+		double execute_attack(int &attack, int &monsterDef){
 			double STRONG_MULTIPLIER = 2;
 			double result;
 			result = (attack * STRONG_MULTIPLIER) - monsterDef;
