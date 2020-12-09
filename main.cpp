@@ -6,7 +6,6 @@
 //#include combatsystemclass
 #include "inventory.cpp"
 #include "item.h"
-#include "iterator.h"
 #include "visitor.h"
 #include "bubble_sort.cpp"
 #include "equip.h"
@@ -266,7 +265,7 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 			cout << endl << "Inventory Sorted!" << endl;
 		}
 		if ((choice == 'c') || (choice == 'C')) {
-			cout << "Enter number of item in inventory list to equip or Z to exit" << endl;
+			cout << "Enter number of item in inventory list (0-" << I->size() << ") to equip or Z to exit" << endl;
             cin >> item_choice;
             if(I->at(item_choice)->get_type() == 0) {
                 p->equip_armor(I->at(item_choice));              

@@ -2,7 +2,6 @@
 #define __EQUIP_H__
 
 #include "item.h"
-#include "iterator.h"
 #include <string>
 #include "visitor.h"
 
@@ -22,10 +21,6 @@ class Equip : public Item {
         }
         Item* get_right() {
             return nullptr;
-        }
-        Iterator* create_iterator() {
-            Iterator* iter = new NullIterator(this);
-            return iter;
         }
         virtual double evaluate() {
             return stat;

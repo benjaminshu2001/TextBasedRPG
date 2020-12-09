@@ -3,7 +3,7 @@
 
 #include "item.h"
 #include <string>
-#include "iterator.h"
+
 
 using namespace std;
 
@@ -19,10 +19,6 @@ class Armor : public Item {
         }
         Item* get_right() {
             return right;
-        }
-        Iterator* create_iterator() {
-            Iterator* iter = new BinaryIterator(this);
-            return iter;
         }
         virtual double evaluate() {
             return right->evaluate();
