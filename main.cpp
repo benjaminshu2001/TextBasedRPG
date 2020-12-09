@@ -3,7 +3,9 @@
 #include "monster.hpp"
 #include "area.hpp"
 #include "player.h"
-//#include combatsystemclass
+#include "attack_strategy.hpp"
+#include "normal_attack.hpp"
+#include "strong_attack.hpp"
 #include "inventory.cpp"
 #include "item.h"
 #include "visitor.h"
@@ -19,6 +21,8 @@ Player* createChar();
 void inventoryMenu(Inventory* I, Player* p, Visitor* v);
 void clearScreen();
 vector<Item*> createLoot();
+void combatInterface(Area* A, Player* p);
+
 
 int main() {
 	
@@ -48,9 +52,9 @@ int main() {
 	gameLoot = createLoot();
 
 	Equip* eq = new Equip("Wooden Sword");
-	Equip* eq1 = new Equip(5);
+	Equip* eq1 = new Equip(3);
 	Equip* eq2 = new Equip("Leather Overalls");
-	Equip* eq3 = new Equip(3);
+	Equip* eq3 = new Equip(2);
 
 
 	Weapon* it = new Weapon(eq, eq1);
@@ -63,9 +67,9 @@ int main() {
 	Protagonist->equip_armor(Inv->at(1));
 	Protagonist->equip_weapon(Inv->at(0));
 	
-    Visitor* v = new Visitor();
-
-	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z')) {
+    	Visitor* v = new Visitor();
+											
+	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z') && (Protagonist->get_health() > 0)) {
 		ThisRmPntr->CurrentLocation();
 		cout << "Area RefCode: " <<  ThisRmPntr->Refcode() << endl;
 		cin >> input;
@@ -99,10 +103,10 @@ int main() {
                			 cout << endl << Protagonist->get_weapon() << endl;
            		}
             		if(Protagonist->armor_equipped() == false) {
-                		cout << endl << "Equipped Armor: None" << endl;
+                		cout <<  "Equipped Armor: None" << endl;
             		}
                		else {
-                		cout << endl << Protagonist->get_armor() << endl;
+                		cout << Protagonist->get_armor() << endl;
             		}		
 	       }
 
@@ -115,7 +119,7 @@ int main() {
 				cout << "Monster is already dead!" << endl;
 			}
 			else {
-				cout << "Combat System not yet implemented!" << endl;
+				combatInterface(ThisRmPntr, Protagonist);			
 			}	
 		}
 
@@ -224,9 +228,9 @@ Player* createChar() {
 
 void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 	char choice = 0;
-    int item_choice = 0;
-    bool visit_counted = false;
-    int inv_size = I->size();
+ 	int item_choice = 1000;
+        bool visit_counted = false;
+        int inv_size = I->size();
 
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
@@ -244,38 +248,49 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 			cout << "==============================================================" << endl;
 			cout << "Here are the that items you currently have in your inventory: " << endl << endl ;
 			I->print();	
-            if(visit_counted == true && inv_size == I->size()) {
-                cout << "Armor count: " << v->armor_count() << endl;
-                cout << "Weapon count: " << v->weapon_count() << endl;
-            }
-            if(visit_counted == false) {
-                for(int i = 0; i < I->size(); i++) {
-                    I->at(i)->accept(v);
-                }
-                visit_counted = true;
-                cout << "Armor count: " << v->armor_count() << endl;
-                cout << "Weapon count: " << v->weapon_count() << endl;
-            }
-			cout << "==============================================================" << endl;
-			cout << endl;
+            			if(visit_counted == true && inv_size == I->size()) {
+                			cout << "Armor count: " << v->armor_count() << endl;
+                			cout << "Weapon count: " << v->weapon_count() << endl;
+            			}
+               			if(visit_counted == false) {
+					for(int i = 0; i < I->size(); i++) {
+                 				I->at(i)->accept(v);
+               				}
+               				visit_counted = true;
+                			cout << "Armor count: " << v->armor_count() << endl;
+                			cout << "Weapon count: " << v->weapon_count() << endl;
+            			}
+				cout << "==============================================================" << endl;
+				cout << endl;
 		}
+
 		if ((choice == 'b') || (choice == 'B')) {
 			I->set_sort_function(new BubbleSort());
-        	I->sort();
+        		I->sort();
 			cout << endl << "Inventory Sorted!" << endl;
 		}
+
 		if ((choice == 'c') || (choice == 'C')) {
-			cout << "Enter number of item in inventory list (0-" << I->size() << ") to equip or Z to exit" << endl;
-            cin >> item_choice;
-            if(I->at(item_choice)->get_type() == 0) {
-                p->equip_armor(I->at(item_choice));              
-            }
-            else if(I->at(item_choice)->get_type() == 1) {
-                p->equip_weapon(I->at(item_choice));
-            }
+			while ((item_choice != 0) && (item_choice > I->size())) {
+				cout << "Enter number of item in inventory list (1-" << I->size() << ") to equip or 0 to exit" << endl;
+	               		cin >> item_choice;
+			
+				if (item_choice > I->size()) {
+					cout << "Invalid Input!" << endl;
+				}
+			}
+					
+			if (item_choice > 0) {
+           		 	if(I->at(item_choice - 1)->get_type() == 0) {
+                			p->equip_armor(I->at(item_choice - 1));              
+            			}
+            			else if(I->at(item_choice - 1)->get_type() == 1) {
+                			p->equip_weapon(I->at(item_choice - 1));
+            			}
+			}
 			cout << endl;	
 		}
-//		cin >> choice;
+		item_choice = 1000;
 	}
 }
 
@@ -295,17 +310,17 @@ vector<Item*> createLoot() {
 	Weapon* DM = new Weapon(dm, dm1);
 
 	Equip* A = new Equip("Shortsword");
-	Equip* A1 = new Equip(6);
+	Equip* A1 = new Equip(5);
 	Equip* B = new Equip("Longsword");
-	Equip* B1 = new Equip(8);
+	Equip* B1 = new Equip(7);
 	Equip* C = new Equip("Mace");
-	Equip* C1 = new Equip(11);
+	Equip* C1 = new Equip(10);
 	Equip* D = new Equip("Chainmail Vest");
-	Equip* D1 = new Equip(5);
+	Equip* D1 = new Equip(4);
 	Equip* E = new Equip("Scale Armor");
-	Equip* E1 = new Equip(8);
+	Equip* E1 = new Equip(7);
 	Equip* F = new Equip("Platemail Armor");
-	Equip* F1 = new Equip(15);
+	Equip* F1 = new Equip(12);
 
     
 	Weapon* SS = new Weapon(A, A1);
@@ -324,4 +339,42 @@ vector<Item*> createLoot() {
 	LT.push_back(PA);
 	
 	return LT;
+}
+
+void combatInterface(Area* A, Player* P) {
+	char input;
+	double Damage;
+
+	cout << "Combat Initiated!" << endl << endl;
+	while ((A->Enemy->health > 0) && (P->get_health() > 0)) {
+		cout << "You are fighting a " << A->Enemy->name << "!" << endl;
+		cout << "It has " << A->Enemy->health << " health remaining." << endl;
+		cout << "You have " << P->get_health() << " health and " << P->get_mana() << " mana remaining." << endl << endl;
+		
+		Damage = P->AttackClient(A->Enemy->def);			
+
+		if (Damage < 0) {
+			Damage = 0;
+		}
+
+		A->Enemy->TakeDamage(Damage);
+		cout << endl << endl << P->get_name() << " does " << Damage << " damage to the " << A->Enemy->name << "!" << endl;
+															
+		if (A->Enemy->health > 0) {
+			Damage = A->Enemy->atk - P->get_defense();
+			if (Damage < 0) {
+				Damage = 0;
+			}			
+
+			P->damageHealth(Damage);
+			cout << "The " << A->Enemy->name << " does " << Damage << " to " << P->get_name() << "!" << endl;	
+		}
+		cout << endl;
+	}
+	if (P->get_health() > 0) {
+		cout << "Victory! " << endl << endl;
+	}
+	else {
+		cout << "Defeat! " << P->get_name() << " has died!" << endl;
+	}	
 }

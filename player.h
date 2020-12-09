@@ -115,6 +115,9 @@ class Player : public Character {
         void decrement_mana(){
             mana -= 1;
         }
+	void damageHealth(int i) {
+	    health -= i;
+	}
 
     // --------------------------------------------------------------------------------------------------
     // the attack client is the call to the attack strategy that can be executed within the player class.
