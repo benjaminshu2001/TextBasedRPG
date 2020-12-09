@@ -66,7 +66,7 @@ int main() {
 	Protagonist->equip_armor(Inv->at(1));
 	Protagonist->equip_weapon(Inv->at(0));
 	
-    	Visitor* v = new Visitor();
+    Visitor* v = new Visitor();
 											
 	while((ThisRmPntr->referenceCode != "end(Here)") && (input != 'z') && (Protagonist->get_health() > 0)) {
 		ThisRmPntr->CurrentLocation();
@@ -228,8 +228,8 @@ Player* createChar() {
 void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 	char choice = 0;
  	int item_choice = 1000;
-        bool visit_counted = false;
-        int inv_size = I->size();
+    bool visit_counted = false;
+    int inv_size = I->size();
 
 	cout << "==============================================================" << endl;
 	cout << "Here are the items that you currently have in your inventory: " << endl << endl;
@@ -252,6 +252,8 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
                 cout << "Weapon count: " << v->weapon_count() << endl;
             }
             if(visit_counted == false) {
+                v->reset_armor();
+                v->reset_weapon();
                 for(int i = 0; i < I->size(); i++) {
                     I->at(i)->accept(v);
                 }
