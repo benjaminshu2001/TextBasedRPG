@@ -22,11 +22,7 @@ class Weapon : public Item {
         }
         Item* get_right() {
             return right;
-        }
-        virtual double evaluate() {
-            return right->evaluate();
-        }
-        virtual string stringify() {      
+        }   
         double evaluate() {
             return right->evaluate();
         }

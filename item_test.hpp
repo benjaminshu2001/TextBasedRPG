@@ -105,6 +105,7 @@ TEST(InventoryTest, WholeInventoryTest) {
     inv->sort();
     cout << "Printing by item type..." << endl << endl;
     inv->print();
+    EXPECT_EQ(inv->size(), 5);
 
 }
 TEST(PlayerTest, WholePlayerTest) {

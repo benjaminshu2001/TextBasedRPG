@@ -1,7 +1,6 @@
 #include "player.h"
 #include "item.h"
 #include "inventory.cpp"
-#include "iterator.h"
 #include <iostream>
 #include <string>
 #include "armor.h"
@@ -68,7 +67,6 @@ int main() {
     //inv->add_element(it1);
     //inv->add_element(it2);
     
-    InvIterator* iit = new InvIterator(dummy);
     
     inv->add_element(w);
     inv->add_element(w1);
