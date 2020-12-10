@@ -411,7 +411,7 @@ void combatInterface(Area* A, Player* P) {
 		cout << endl;
 	}
 	if (P->get_health() > 0) {
-		cout << "Victory! " << endl << endl;
+		cout << "Victory! You have rested and restored health and mana." << endl << endl;
 		P->add_health(3);
 		P->add_mana(1);
 	}
