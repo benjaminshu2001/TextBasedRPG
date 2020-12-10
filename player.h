@@ -115,9 +115,15 @@ class Player : public Character {
         void decrement_mana(){
             mana -= 1;
         }
-	void damageHealth(int i) {
-	    health -= i;
-	}
+        void add_mana(int i){
+            mana += i;
+        }
+        void add_health(int i){
+            health += i;
+        }
+    	void damageHealth(int i) {
+    	    health -= i;
+    	}
 
     // --------------------------------------------------------------------------------------------------
     // the attack client is the call to the attack strategy that can be executed within the player class.
@@ -129,24 +135,25 @@ class Player : public Character {
     double AttackClient(int d_monster){
         string input;
         AttackType *type = new AttackType(new NormalAttack);
+        double input;
+
         while (true){
             cout << "Select attack type:\n(1) Normal Attack\n(2) Strong Attack [uses 1 mana]" << endl;
-	    double input;
             cin >> input;
             if (input == 1){
                 type->setAttack(new NormalAttack);
                	cout << "normal attack selected." << endl;
-		break;
+		        break;
             }
-            if (input == 2){
-		double mana_val = get_mana();
+            else if (input == 2){
+		            //  double mana_val = get_mana();
 					//	cout << "(TEST) INIT MANA = " << mana_val << endl;
                 if (mana_val > 0.0){
                     type->setAttack(new StrongAttack);
 					//	cout << "(TEST) MANA = " << get_mana() << endl;
                     decrement_mana();
 					//	cout << "(TEST) MANA = " << get_mana() << endl;
-		    cout << "strong attack selected." << endl;
+		            cout << "strong attack selected." << endl;
                     break;
                 }
                 else {
