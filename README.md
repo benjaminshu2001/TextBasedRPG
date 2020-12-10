@@ -83,7 +83,8 @@
  ## Screenshots
  > Screenshots of the input/output after running your application
  ## Installation/Usage
- > Instructions on installing and running your application
+ > To install, run make, and then input ./Game.
+ > Afterwards, prompts will appear on the screen informing the player of what actions can be done, and what inputs one uses to do those actions.
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
- 
+ > We ran through our game multiple times from beginning to end, doing everything possible and fixing any bugs that popped up along the way. In terms of unit tests, we used google tests as well.
