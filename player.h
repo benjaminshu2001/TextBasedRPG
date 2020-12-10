@@ -134,17 +134,18 @@ class Player : public Character {
     // --------------------------------------------------------------------------------------------------
     double AttackClient(int d_monster){
         AttackType *type = new AttackType(new NormalAttack);
-        double input;
+        char input;
 
         while (true){
             cout << "Select attack type:\n(1) Normal Attack\n(2) Strong Attack [uses 1 mana]" << endl;
             cin >> input;
-            if (input == 1){
+            int in = (int)input; 
+            if (in == '1'){
                 type->setAttack(new NormalAttack);
                	cout << "normal attack selected." << endl;
 		        break;
             }
-            else if (input == 2){
+            else if (input == '2'){
 		            //  double mana_val = get_mana();
 					//	cout << "(TEST) INIT MANA = " << mana_val << endl;
                 if (mana > 0.0){
