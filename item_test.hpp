@@ -36,6 +36,7 @@ TEST(ItemTest, ArmorTest) {
     EXPECT_EQ(b->evaluate(), 1);
     EXPECT_EQ(inv->size(), 2);
 }
+
 TEST(ItemTest, WeaponTest) {
     Inventory* inv = new Inventory();
     Equip* e1 = new Equip("Sword");
@@ -52,6 +53,7 @@ TEST(ItemTest, WeaponTest) {
     EXPECT_EQ(b->stringify(), "Weapon: Mace, Attack: 3.000000");
     EXPECT_EQ(b->evaluate(), 3);
 }
+
 TEST(ItemTest, ZeroArmorTest) {
     Inventory* inv = new Inventory();
     Equip* e1 = new Equip("Overalls");
@@ -70,6 +72,7 @@ TEST(ItemTest, ZeroArmorTest) {
     EXPECT_EQ(b->evaluate(), 0);
     EXPECT_EQ(inv->size(), 2);
 }
+
 TEST(InventoryTest, WholeInventoryTest) {
     Inventory* inv = new Inventory();
     Equip* e1 = new Equip("ODM Helmet");
@@ -106,8 +109,8 @@ TEST(InventoryTest, WholeInventoryTest) {
     cout << "Printing by item type..." << endl << endl;
     inv->print();
     EXPECT_EQ(inv->size(), 5);
-
 }
+
 TEST(PlayerTest, WholePlayerTest) {
     Player* p = new Player("Levi", 10, 10, 5, 5);
     Inventory* inv = new Inventory();
@@ -139,9 +142,18 @@ TEST(PlayerTest, WholePlayerTest) {
     p->equip_armor(odm_leg);
     p->equip_armor(odm_boot);
     
-    EXPECT_EQ(p->get_attack(), 155);
+    EXPECT_EQ(p->get_attack(), 155); 
+}
 
+TEST(PlayerTest, NoEquipTest) {
+    Player* p = new Player("Test", 10, 10, 3, 3);
+    Inventory* inv = new Inventory();
+    if(p->weapon_equipped() == false) {
+        cout << "No weapon is equipped." << endl;
+    }
     
-
+    if(p->armor_equipped() == false) {
+        cout << "No armor is equipped." << endl;
+    }
 }
 #endif

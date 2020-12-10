@@ -95,4 +95,43 @@ TEST(VisitorTest, WeaponVisit) {
     EXPECT_EQ(v->weapon_count(), 4);
 
 }
+TEST(VisitorTest, ZeroVisit) {
+    Inventory* inv = new Inventory();
+    Visitor* v = new Visitor();
+    Equip* eq = new Equip("null");
+    inv->add_element(eq);
+    inv->at(0)->accept(v);
+    EXPECT_EQ(v->armor_count(), 0);
+    EXPECT_EQ(v->weapon_count(), 0);
+}
+TEST(VisitorTest, ArmorWeaponVisit) {
+    Inventory* inv = new Inventory();
+    
+    Equip* eq = new Equip("Sword");
+    Equip* eq1 = new Equip(2);
+    Equip* eq2 = new Equip("Helmet");
+    Equip* eq3 = new Equip(2);
+    Equip* eq4 = new Equip("Claws");
+    Equip* eq5 = new Equip(5);
+    Equip* eq6 = new Equip("Overalls");
+    Equip* eq7 = new Equip(2);
+
+    Weapon* a = new Weapon(eq, eq1);
+    Armor* a1 = new Armor(eq2, eq3);
+    Weapon* a2 = new Weapon(eq4, eq5);
+    Armor* a3 = new Armor(eq6, eq7);
+    
+    inv->add_element(a);
+    inv->add_element(a1);
+    inv->add_element(a2);
+    inv->add_element(a3);
+    
+    Visitor* v = new Visitor();
+    for(int i = 0; i < inv->size(); i++) {
+        inv->at(i)->accept(v);
+    }
+    EXPECT_EQ(v->armor_count(), 2);
+    EXPECT_EQ(v->weapon_count(), 2);
+
+}
 #endif
