@@ -385,6 +385,7 @@ void combatInterface(Area* A, Player* P) {
 	double Damage;
 
 	cout << "Combat Initiated!" << endl << endl;
+    cout << A->Enemy->desc() << endl << endl;
 	while ((A->Enemy->health > 0) && (P->get_health() > 0)) {
 		cout << "You are fighting a " << A->Enemy->name << "!" << endl;
 		cout << "It has " << A->Enemy->health << " health remaining." << endl;
