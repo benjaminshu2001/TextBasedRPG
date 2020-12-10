@@ -407,6 +407,8 @@ void combatInterface(Area* A, Player* P) {
 	}
 	if (P->get_health() > 0) {
 		cout << "Victory! " << endl << endl;
+		P->add_health(3);
+		P->add_mana(1);
 	}
 	else {
 		cout << "Defeat! " << P->get_name() << " has died!" << endl;
