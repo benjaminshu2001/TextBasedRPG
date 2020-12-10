@@ -95,4 +95,14 @@ TEST(VisitorTest, WeaponVisit) {
     EXPECT_EQ(v->weapon_count(), 4);
 
 }
+TEST(VisitorTest, ZeroVisit) {
+    Inventory* inv = new Inventory();
+    Visitor* v = new Visitor();
+    Equip* eq = new Equip("null");
+    inv->add_element(eq);
+    inv->at(0)->accept(v);
+    EXPECT_EQ(v->armor_count(), 0);
+    EXPECT_EQ(v->weapon_count(), 0);
+}
+
 #endif
