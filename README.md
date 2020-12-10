@@ -83,7 +83,7 @@
  ## Screenshots
  > Screenshots of the input/output after running your application
  
- ![Starting Screen](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/start.png?raw=true)
+ ![Starting Screen](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/Start.png)
  
  Here is the starting screen, where you can either input 2 chars, 'x' or 'z'. 'X' starts the game, while 'z' stops the program.
  
