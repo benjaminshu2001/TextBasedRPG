@@ -17,11 +17,34 @@ TEST(AreaTest, AddingRoom) {
 
 
 	string ref = "A3";
-	EXPECT_EQ(ref, AreaPntr->Refcode());
-	
+	EXPECT_EQ(ref, AreaPntr->Refcode());	
 } 
 
+TEST(AreaTest, FillMap) {
+	Area* Base = 0;
+	Area* Pntr = 0;
+	Base = Base->beginMap();
+	Pntr = Base;
 
+	string RM1;
+	string RM2;
+	string RM3;
 
+	Pntr = Pntr->North;
+	Pntr = Pntr->North;
+	Pntr = Pntr->North;
+	RM1 = Pntr->Refcode();
 
+	Pntr = Pntr->West;
+	RM2 = Pntr->Refcode();
+	
+	Pntr = Pntr->East;
+	Pntr = Pntr->North;
+	Pntr = Pntr->East;
+	RM3 = Pntr->Refcode();
+
+	EXPECT_EQ(RM1, "A3");
+	EXPECT_EQ(RM2, "C1");
+	EXPECT_EQ(RM3, "D1");
+}
 #endif
