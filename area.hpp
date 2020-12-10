@@ -112,25 +112,25 @@ class Area{
 			Monster* Mina = new Minotaur(15, 15, 30);
 		
 
-			this->AddNorthRoom(GobA, "A1", "You are in a hallway.", 0);
-			this->North->AddNorthRoom(0, "A2", "You are in a hallway.", 1);
-			this->North->North->AddWestRoom(GobB, "B1", "", 4);
-			this->North->North->AddNorthRoom(0, "A3", "You are in a hallway.", 0);
+			this->AddNorthRoom(GobA, "A1", "You are in a hallway.", 1);
+			this->North->AddNorthRoom(0, "A2", "You are in a hallway.", 0);
+			this->North->North->AddWestRoom(GobB, "B1", "", 5);
+			this->North->North->AddNorthRoom(GobA, "A3", "You are in a hallway.", 0);
 			this->North->North->North->AddWestRoom(0, "C1", "", 0);
 			this->North->North->North->West->AddWestRoom(0, "C2", "", 0);
-			this->North->North->North->West->West->AddWestRoom(0, "C3", "", 0);		
-			this->North->North->North->AddNorthRoom(GobC, "A4", "You are in a hallway.", 0);
+			this->North->North->North->West->West->AddWestRoom(0, "C3", "", 3);		
+			this->North->North->North->AddNorthRoom(GobC, "A4", "You are in a hallway.", 2);
 			this->North->North->North->North->AddEastRoom(0, "D1", "", 0);
-			this->North->North->North->North->East->AddEastRoom(0, "D2", "", 5);
-			this->North->North->North->North->AddNorthRoom(0, "A5", "You are in a hallway.", 0);
+			this->North->North->North->North->East->AddEastRoom(0, "D2", "", 7);
+			this->North->North->North->North->AddNorthRoom(GobB, "A5", "You are in a hallway.", 6);
 			this->North->North->North->North->North->AddNorthRoom(0, "A6", "You are in a hallway.", 0);
-			this->North->North->North->North->North->North->AddWestRoom(GobB, "E1", "", 2);
+			this->North->North->North->North->North->North->AddWestRoom(GobB, "E1", "", 4);
 			this->North->North->North->North->North->North->AddNorthRoom(0, "A7", "You are in a hallway.", 0);
 			this->North->North->North->North->North->North->North->AddNorthRoom(0, "A8", "You are in a hallway.", 0);
 			this->North->North->North->North->North->North->North->North->AddWestRoom(GobC, "F1", "", 3);
 			this->North->North->North->North->North->North->North->North->AddEastRoom(0, "G1", "", 0);
-			this->North->North->North->North->North->North->North->North->East->AddEastRoom(0, "G2", "", 0);
-			this->North->North->North->North->North->North->North->North->AddNorthRoom(OrkA, "A9", "You are in a hallway.", 6);
+			this->North->North->North->North->North->North->North->North->East->AddEastRoom(OrkA, "G2", "", 8);
+			this->North->North->North->North->North->North->North->North->AddNorthRoom(OrkA, "A9", "You are in a hallway.", 9);
 			this->North->North->North->North->North->North->North->North->North->AddNorthRoom(Mina, "A10", "", 0);
 			this->North->North->North->North->North->North->North->North->North->North->AddNorthRoom(0, "end", "This is the last room.", 0);
 		}

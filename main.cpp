@@ -114,7 +114,7 @@ int main() {
 	       }
 
 		else if ((input == 'x') && (ThisRmPntr->Enemy != 0)) {
-			if (ThisRmPntr->Enemy->health < 0) {
+			if (ThisRmPntr->Enemy->health <= 0) {
 				cout << "Monster is already dead!" << endl;
 			}
 			else {
@@ -139,37 +139,58 @@ int main() {
 		}
  
 		else if ((input == 'a' &&  ThisRmPntr->MoveChecker(1) == true)) {
-			ThisRmPntr->referenceCode = LastRmRC;
-			LastRmRC = ThisRmPntr->West->Refcode();
-			ThisRmPntr = ThisRmPntr->West;
-			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
-			cout << "You have moved west." << endl << endl;
+			if ((ThisRmPntr->Enemy != 0) && (ThisRmPntr->Enemy->health > 0)) {
+				cout << "You must defeat the enemy before moving!" << endl << endl;
+			}			
+			else {
+				ThisRmPntr->referenceCode = LastRmRC;
+				LastRmRC = ThisRmPntr->West->Refcode();
+				ThisRmPntr = ThisRmPntr->West;
+				ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+				cout << "You have moved west." << endl << endl;
+			}
 		}
 		
 		else if ((input == 'd') && (ThisRmPntr->MoveChecker(2) == true)) {
-			ThisRmPntr->referenceCode = LastRmRC;
-			LastRmRC = ThisRmPntr->East->Refcode();
-			ThisRmPntr = ThisRmPntr->East;
-			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
-			cout << "You have moved east." << endl << endl;
+			if ((ThisRmPntr->Enemy != 0) && (ThisRmPntr->Enemy->health > 0)) {
+				cout << "You must defeat the enemy before moving!" << endl << endl;
+			}
+			else {
+				ThisRmPntr->referenceCode = LastRmRC;
+				LastRmRC = ThisRmPntr->East->Refcode();
+				ThisRmPntr = ThisRmPntr->East;
+				ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";		
+				cout << "You have moved east." << endl << endl;
+			}
 		}
+		
 
 		else if ((input == 'w') && (ThisRmPntr->MoveChecker(4) == true)) {
-			ThisRmPntr->referenceCode = LastRmRC;
-			LastRmRC = ThisRmPntr->North->Refcode();
-			ThisRmPntr = ThisRmPntr->North;
-			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
-			cout << "You have moved north." << endl << endl;
+			if ((ThisRmPntr->Enemy != 0) && (ThisRmPntr->Enemy->health > 0)) {
+				cout << "You must defeat the enemy before moving!" << endl << endl;
+			}
+			else {		
+				ThisRmPntr->referenceCode = LastRmRC;
+				LastRmRC = ThisRmPntr->North->Refcode();
+				ThisRmPntr = ThisRmPntr->North;
+				ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+				cout << "You have moved north." << endl << endl;
+			}
 		}
 								
 		else if ((input == 's') && (ThisRmPntr->MoveChecker(3) == true)) {
-			ThisRmPntr->referenceCode = LastRmRC;
-			LastRmRC = ThisRmPntr->South->Refcode();
-			ThisRmPntr = ThisRmPntr->South;
-			ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
-			cout << "You have moved south." << endl << endl;		
+			if ((ThisRmPntr->Enemy != 0) && (ThisRmPntr->Enemy->health > 0)) {
+				cout << "You must defeat the enemy before moving!" << endl << endl;
+			}
+			else {	
+				ThisRmPntr->referenceCode = LastRmRC;
+				LastRmRC = ThisRmPntr->South->Refcode();
+				ThisRmPntr = ThisRmPntr->South;
+				ThisRmPntr->referenceCode = ThisRmPntr->referenceCode + "(Here)";
+				cout << "You have moved south." << endl << endl;		
+			}
 		}
-		
+	
 		else {
 			cout << "Invalid Input!" << endl;
 		}
@@ -322,22 +343,34 @@ vector<Item*> createLoot() {
 	Equip* E1 = new Equip(7);
 	Equip* F = new Equip("Platemail Armor");
 	Equip* F1 = new Equip(12);
+	Equip* G = new Equip("Steel Armor");
+	Equip* G1 = new Equip(15);	
+	Equip* H = new Equip("Spear");
+	Equip* H1 = new Equip(12);
+	Equip* I = new Equip("Warhammer");
+	Equip* I1 = new Equip(15);
 
     
 	Weapon* SS = new Weapon(A, A1);
 	Weapon* LS = new Weapon(B, B1);
 	Weapon* MA = new Weapon(C, C1);
+	Weapon* SP = new Weapon(H, H1);
+	Weapon* WH = new Weapon(I, I1);
 	Armor* CV = new Armor(D, D1);
 	Armor* SA = new Armor(E, E1);
 	Armor* PA = new Armor(F, F1);
+	Armor* STA = new Armor(G, G1);
 	
 	LT.push_back(DM);
-	LT.push_back(SS);
-	LT.push_back(LS);
-	LT.push_back(MA);
-	LT.push_back(CV);	
-	LT.push_back(SA);
-	LT.push_back(PA);
+	LT.push_back(SS); //1
+	LT.push_back(LS); //2
+	LT.push_back(MA); //3
+	LT.push_back(CV); //4	
+	LT.push_back(SA); //5
+	LT.push_back(PA); //6
+	LT.push_back(STA); //7
+	LT.push_back(SP); //8
+	LT.push_back(WH); //9
 	
 	return LT;
 }
