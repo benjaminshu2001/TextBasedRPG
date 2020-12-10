@@ -82,8 +82,30 @@
  > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Kanban board. 
  ## Screenshots
  > Screenshots of the input/output after running your application
+ 
+ ![Starting Screen](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/Start.png)
+ 
+ Here is the starting screen, where you can either input 2 chars, 'x' or 'z'. 'X' starts the game, while 'z' stops the program.
+ 
+ ![Name](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/PlayerName.png)
+ 
+ Here, the player inputs a name, which will be outputted in other functions to refer to the player.
+ 
+ ![Map](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/Map.png)
+ 
+ While not in your inventory screen or a fight, the player can input 'm' to output the entire map and your location relative to all other rooms.
+ 
+ ![Inventory](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/Inventory.png)
+ 
+ While not already in an inventory screen or a fight, the player can input 'i' to output their inventory screen and manage it from there with various inputs.
+ 
+ ![Fighting](https://github.com/cs100/final-project-dchen090-bshu005-dkim417/blob/master/images/Fighting.png)
+ 
+ During a fight, the player can input '1' or '2' to output damage towards the monster in a room. Fighting ends when either the player health or monster health reaches 0.
+ 
  ## Installation/Usage
- > Instructions on installing and running your application
+ > To install, run make, and then input ./Game.
+ > Afterwards, prompts will appear on the screen informing the player of what actions can be done, and what inputs one uses to do those actions.
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
- 
+ > We ran through our game multiple times from beginning to end, doing everything possible and fixing any bugs that popped up along the way. In terms of unit tests, we used google tests as well.
