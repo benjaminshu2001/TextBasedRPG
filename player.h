@@ -133,7 +133,6 @@ class Player : public Character {
     // OUTPUT: double containing the value of player attack - monster defense
     // --------------------------------------------------------------------------------------------------
     double AttackClient(int d_monster){
-        string input;
         AttackType *type = new AttackType(new NormalAttack);
         double input;
 
@@ -148,7 +147,7 @@ class Player : public Character {
             else if (input == 2){
 		            //  double mana_val = get_mana();
 					//	cout << "(TEST) INIT MANA = " << mana_val << endl;
-                if (mana_val > 0.0){
+                if (mana > 0.0){
                     type->setAttack(new StrongAttack);
 					//	cout << "(TEST) MANA = " << get_mana() << endl;
                     decrement_mana();
