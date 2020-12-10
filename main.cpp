@@ -401,7 +401,7 @@ void combatInterface(Area* A, Player* P) {
 			}			
 
 			P->damageHealth(Damage);
-			cout << "The " << A->Enemy->name << " does " << Damage << " to " << P->get_name() << "!" << endl;	
+			cout << "The " << A->Enemy->name << " does " << Damage << " damage to " << P->get_name() << "!" << endl;	
 		}
 		cout << endl;
 	}
