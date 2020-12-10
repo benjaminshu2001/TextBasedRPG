@@ -388,7 +388,7 @@ void combatInterface(Area* A, Player* P) {
 		Damage = P->AttackClient(A->Enemy->def);			
 
 		if (Damage < 0) {
-			Damage = 0;
+			Damage = 1;
 		}
 
 		A->Enemy->TakeDamage(Damage);
@@ -397,7 +397,7 @@ void combatInterface(Area* A, Player* P) {
 		if (A->Enemy->health > 0) {
 			Damage = A->Enemy->atk - P->get_defense();
 			if (Damage < 0) {
-				Damage = 0;
+				Damage = 1;
 			}			
 
 			P->damageHealth(Damage);
