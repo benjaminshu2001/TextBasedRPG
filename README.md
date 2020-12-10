@@ -104,8 +104,7 @@
  During a fight, the player can input '1' or '2' to output damage towards the monster in a room. Fighting ends when either the player health or monster health reaches 0.
  
  ## Installation/Usage
- > To install, run make, and then input ./Game.
+ > To install and run this game, run make, and then input ./Game.
  > Afterwards, prompts will appear on the screen informing the player of what actions can be done, and what inputs one uses to do those actions.
  ## Testing
- > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  > We ran through our game multiple times from beginning to end, doing everything possible and fixing any bugs that popped up along the way. In terms of unit tests, we used google tests as well.
