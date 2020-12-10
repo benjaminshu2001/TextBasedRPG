@@ -295,10 +295,15 @@ void inventoryMenu(Inventory *I, Player* p, Visitor* v) {
 		if ((choice == 'c') || (choice == 'C')) {
 			while ((item_choice != 0) && (item_choice > I->size())) {
 				cout << "Enter number of item in inventory list (1-" << I->size() << ") to equip or 0 to exit" << endl;
-	               		cin >> item_choice;
+	            cin >> item_choice;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(512, '\n');
+                    cout << "Invalid input!";
+                } 
 			
 				if (item_choice > I->size()) {
-					cout << "Invalid Input!" << endl;
+					cout << "Invalid input!" << endl;
 				}
 			}
 					
